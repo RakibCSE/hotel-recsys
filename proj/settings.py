@@ -2,6 +2,8 @@
 import json
 import os
 
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -155,3 +157,23 @@ MEDIA_URL = '/media/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 INTERNAL_IPS = JSON_DATA["internal_ip"]
+
+
+# Celery application definitions
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Dhaka'
+CELERY_IMPORTS = ('ml.tasks', )
+CELERY_BEAT_SCHEDULE = {
+    'task-number-one': {
+        'task': 'ml.tasks.task_number_one',
+        'schedule': crontab(minute='*/1')
+    },
+    'task-number-two': {
+        'task': 'ml.tasks.task_number_two',
+        'schedule': crontab(minute='*/2')
+    }
+}
