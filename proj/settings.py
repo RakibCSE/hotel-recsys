@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'hotel',
+    'ml_engine',
 ]
 
 MIDDLEWARE = [
@@ -166,14 +167,10 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Dhaka'
-CELERY_IMPORTS = ('ml.tasks', )
+CELERY_IMPORTS = ('ml_engine.tasks', )
 CELERY_BEAT_SCHEDULE = {
-    'task-number-one': {
-        'task': 'ml.tasks.task_number_one',
-        'schedule': crontab(minute='*/1')
+    'main': {
+        'task': 'ml_engine.tasks.main',
+        'schedule': crontab(minute='50')
     },
-    'task-number-two': {
-        'task': 'ml.tasks.task_number_two',
-        'schedule': crontab(minute='*/2')
-    }
 }
