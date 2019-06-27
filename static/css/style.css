@@ -1,0 +1,124 @@
+.textShadow {
+
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 75px/normal "Arizonia", Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    text-shadow: 0 15px 29px rgba(0, 0, 0, 0.0980392), 10px 20px 5px rgba(0, 0, 0, 0.0470588), -10px 20px 5px rgba(0, 0, 0, 0.0470588);
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+
+}
+
+.pxc:hover {
+    background-color: #e6e6e6;
+}
+
+.textShadow:hover {
+    text-shadow: 0 -15px 29px rgba(0, 0, 0, 0.0980392), 10px -20px 5px rgba(0, 0, 0, 0.0470588), -10px -20px 5px rgba(0, 0, 0, 0.0470588);
+}
+
+.slider ul.indicators li.indicator-item.active {
+    background-color: #ab47bc;
+}
+
+.slider ul.indicators li.indicator-item {
+    background-color: #C2BDBD;
+}
+
+.nav-wrapper ul li {
+    display: inline-block;
+}
+
+.nav-wrapper {
+    text-align: center;
+}
+
+.book-now {
+    border: none;
+    font: normal 76px/1 "Arizonia", Helvetica, sans-serif;
+    color: #ba68c8;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.signin {
+    border: none;
+    font: normal 76px/1 "Arizonia", Helvetica, sans-serif;
+    color: #ba68c8;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.contactUs {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 56px/1 "Arizonia", Helvetica, sans-serif;
+    color: #ab47bc;
+
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+/*.parallax-container{
+	height: 400px;
+}*/
+
+.check-button {
+
+    text-align: center;
+}
+
+.USER_ADMIN {
+    text-align: center;
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    background-color: #ab47bc;
+}
+
+.jkl:hover {
+    color: Blue;
+}
+
+.jkl {
+    height: 150px;
+    margin: 0 auto;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+/*.ttabb
+{
+   border-bottom:1px solid purple;
+   border-left:1px solid purple;
+   border-right:1px solid purple;
+}*/
+
+.formcls:hover {
+    color: #ffe6e6;
+}
+
+
+
+
+
