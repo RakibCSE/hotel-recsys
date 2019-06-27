@@ -11,13 +11,53 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Import Materialize CSS -->
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
+    <!-- Import Font Awesome -->
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Akronim" data-generated="http://enjoycss.com"
+          type="text/css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arizonia" data-generated="http://enjoycss.com"
+          type="text/css"/>
+
+    {% block css %}  {% endblock %}
+
 </head>
 <body>
 
+<div class="row purple lighten-2" style="margin: 0px;text-align: center;">
+    <div class="col s12 m12">
+        <h6 class="textShadow">Hotel Recommendation System</h6>
+    </div>
+</div>
+
+<!-- Navbar Start -->
+<div class="navbar">
+    <nav class="purple lighten-2" role="navigation" style="">
+        <div class="nav-wrapper">
+            <ul class="right hide-on-med-and-down" style="">
+                <li><a href="#booknow" class="head-link" style="">Book Now</a></li>
+                <li><a href="sign_up.html" style="">Sign In</a></li>
+                <li><a href="sign_up.html" style="">Sign Up</a></li>
+                <li><a class="head-link" href="#contactus">Contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+
+<!-- Content Start -->
 {% block content %} {% endblock %}
+<!-- Content End -->
 
 
+<!-- Import JQuery JS -->
+<script src="{% static "js/jquery-3.1.1.min.js" %}"></script>
 <!-- Import Materialize JS -->
 <script src="{% static "js/materialize.min.js" %}"></script>
+<!-- Custom JS -->
+<script src="{% static "js/custom.js" %}"></script>
+{% block js %}  {% endblock %}
 </body>
 </html>

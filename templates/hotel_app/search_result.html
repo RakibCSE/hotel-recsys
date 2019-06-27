@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for hotel in hotels_data %}
+                <div class="col s9 m9">
+                    <div class="row pxc"
+                         style="height:300px;border:1px solid grey;border-radius:4px;margin-top:50px;margin-left:50px;">
+                        <div class="col s6 m6">
+                            <img src="{{ hotel.thumb_urls_as_list.3 }}" alt="{{ hotel.hotel_name }}" style="height:250px;width:300px;margin-top:30px;"/>
+                        </div>
+                        <div class="col s6 m6">
+                            <p style="text-align:left;margin-right:10px;" class="blue-text">{{ hotel.hotel_name }}</p>
+                            <h6>{{ hotel.star_rating }}</h6>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <br>
+                            <div class="jkl">
+                                <p>{{ hotel.address }}, {{ hotel.district }}</p>
+                                <p>{{ hotel.country }}</p>
+                                <p style="text-align:left;"><span style="font-size:15px;">{{ hotel.review_badge }}</span></p>
+                                <p style="text-align:right;font-size:20px;margin-top:-30px;">
+                                    <span>{{ hotel.hotel_price }}</span>
+                                </p>
+                                <div style="margin-top:-10px;width:250px;float:right;">
+                                    <a href="">
+                                        <p style="color:black;text-align:center;border:2px solid white;margin-top:0;background-color:white">
+                                            <span style="color:black;">see our latest available rooms</span>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
