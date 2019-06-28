@@ -111,3 +111,4 @@ celerybeat-schedule.dat
 celerybeat-schedule.dir
 
 data/
+reference.txt
