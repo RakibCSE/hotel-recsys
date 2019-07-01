@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'ml_engine',
 ]
 
+AUTH_USER_MODEL = "hotel.CustomUser"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -122,6 +124,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "hotel:index"
+LOGOUT_REDIRECT_URL = "hotel:index"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

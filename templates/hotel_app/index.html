@@ -46,7 +46,7 @@
             <div class="row">
                 <form class="col s12 m12 l12" method="get" action="{% url "hotel:index" %}"
                       style="border-radius:20px;">
-{#                    {% csrf_token %}#}
+                    {#                    {% csrf_token %}#}
 
                     <div class="row">
                         <div class="input-field col s3 m3 l3" style="margin-top:0;margin-bottom:0;">
@@ -65,12 +65,12 @@
                             <label for="checkout_field">Check-Out Date</label>
                         </div>
                         <div class="input-field col s3 m3 l1" style="margin-top:0;margin-bottom:0;">
-                            <input id="room_field" type="text" name="rooms" class="validate">
+                            <input id="room_field" type="text" name="room" class="validate">
                             <label for="room_field">Rooms</label>
                         </div>
 
                         <div class="input-field col s3 m3 l1" style="margin-top:0;margin-bottom:0;">
-                            <input id="adult_field" type="text" name="adults" class="validate">
+                            <input id="adult_field" type="text" name="adult" class="validate">
                             <label for="adult_field">Adults</label>
                         </div>
 
@@ -91,6 +91,17 @@
             </div>
         </div>
     </div>
+
+    <!-- templates/home.html -->
+    <h1>Django Login Mega-Tutorial</h1>
+    {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}
+        <p><a href="{% url 'logout' %}">Log out</a></p>
+    {% else %}
+        <p><a href="{% url 'hotel:signup' %}">Sign Up</a></p>
+        <p><a href="{% url 'login' %}">Log In </a></p>
+    {% endif %}
+
 
 {% endblock %}
 
