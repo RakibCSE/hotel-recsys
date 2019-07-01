@@ -1,4 +1,11 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class CustomUser(AbstractUser):
+    username = models.CharField(max_length=25, unique=True)
+    email = models.EmailField(unique=True)
+    fullname = models.CharField(max_length=100)
 
 
 class HotelDetail(models.Model):
@@ -7,12 +14,18 @@ class HotelDetail(models.Model):
     hotel_name = models.TextField(max_length=1000)
     address = models.TextField(max_length=1000)
     district = models.TextField(max_length=300)
+    region = models.TextField(max_length=50)
     country = models.TextField(max_length=100)
     thumb_urls = models.TextField(max_length=5000)
     star_rating = models.FloatField()
     guest_rating = models.FloatField()
     review_badge = models.TextField(max_length=100)
+    hotel_latitude = models.FloatField()
+    hotel_longitude = models.FloatField()
     hotel_price = models.TextField(max_length=50)
+    district_id = models.IntegerField()
+    region_id = models.IntegerField()
+    country_id = models.IntegerField()
 
     def __str__(self):
         return self.hotel_name
@@ -24,9 +37,12 @@ class HotelDetail(models.Model):
 class UserInteraction(models.Model):
     user_id = models.BigIntegerField()
     hotel_id = models.BigIntegerField()
-    date_time = models.DateTimeField(auto_now_add=True)
-    checkin_date_time = models.DateTimeField()
-    checkout_date_time = models.DateTimeField()
+    year = models.IntegerField()
+    month = models.IntegerField()
+    srch_ci_year = models.IntegerField()
+    srch_ci_month = models.IntegerField()
+    srch_co_year = models.IntegerField()
+    srch_co_month = models.IntegerField()
     hotel_country = models.IntegerField()
     user_location_country = models.IntegerField()
     user_location_city = models.IntegerField()
@@ -40,3 +56,8 @@ class UserInteraction(models.Model):
 
     def __str__(self):
         return self.hotel_id
+
+
+class CountryData(models.Model):
+    country_name = models.CharField(max_length=50)
+    country_abbr = models.CharField(max_length=10)
