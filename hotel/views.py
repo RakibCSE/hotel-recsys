@@ -64,7 +64,7 @@ def save_search_data(request, query_data, booking=0):
     user_interaction_obj.srch_ci_year = get_year(checkin_date)
     user_interaction_obj.srch_ci_month = get_month(checkin_date)
     user_interaction_obj.srch_co_year = get_year(checkout_date)
-    user_interaction_obj.srch_co_month = get_year(checkout_date)
+    user_interaction_obj.srch_co_month = get_month(checkout_date)
     user_interaction_obj.hotel_country = query_data.country_id
     user_interaction_obj.user_location_country = response.country.geoname_id
     user_interaction_obj.user_location_city = response.city.geoname_id
@@ -100,21 +100,13 @@ def index(request):
 
         paginator = Paginator(list(hotels_data_list), 10)
         total_pages = paginator.num_pages
-        print(total_pages, page)
 
-        if total_pages <= 11 or page <= 6:
-            hotels_data = [hotels_data_list[x] for x in range(1, min(total_pages + 1, 12))]
-        elif page > total_pages - 6:
-            hotels_data = [hotels_data_list[x] for x in range(total_pages - 10, total_pages + 1)]
-        else:
-            hotels_data = [hotels_data_list[x] for x in range(page - 5, page + 6)]
-
-        # try:
-        #     hotels_data = paginator.page(page)
-        # except PageNotAnInteger:
-        #     hotels_data = paginator.page(1)
-        # except EmptyPage:
-        #     hotels_data = paginator.page(paginator.num_pages)
+        try:
+            hotels_data = paginator.page(page)
+        except PageNotAnInteger:
+            hotels_data = paginator.page(1)
+        except EmptyPage:
+            hotels_data = paginator.page(paginator.num_pages)
 
         return render(request, "hotel_app/search_result.html", {
             'hotels_data': hotels_data,
