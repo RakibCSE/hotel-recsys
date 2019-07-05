@@ -1,0 +1,25 @@
+/* login_sign_up.html CSS*/
+.FORMCLS {
+    margin-top: 50px;
+    background-color: #930d0d;
+
+}
+
+.FORM_HEADING_CLS {
+    font-weight: 600;
+
+}
+
+.INPUT_FIELD_CLASS {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.field_text_clr {
+    color: white;
+}
+
+.butoncolor {
+
+    background-color: #930d0d;
+}

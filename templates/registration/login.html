@@ -1,6 +1,61 @@
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+   <link rel="stylesheet" href="{% static "css/signup_login.css" %}">
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div id="signin" class="col s12 offset-s3">
+            <div class="col s4 m4 l4 xl4">
+                <div class="card-panel hoverable z-depth-5 FORMCLS">
+                    <h4 class="center white-text FORM_HEADING_CLS">Sign In</h4>
+                    <div class="row" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <form class="col s12 m12">
+                            <div class="row">
+                                <div class="input-field col s12 m12 INPUT_FIELD_CLASS">
+                                    <i class="material-icons prefix">person</i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix"><span style="color:white;">Username</span></label>
+                                </div>
+                                <div class="input-field col s12 m12 INPUT_FIELD_CLASS">
+                                    <i class="fa fa-unlock-alt prefix"></i>
+                                    <input id="icon_password" type="password" class="validate">
+                                    <label for="icon_password"><span style="color:white;">Password</span></label>
+                                </div>
+
+                                <div class="col s12 m12 l12 xl12" style="margin-top:20px;margin-bottom:-10px;">
+                                    <div class="chekbutton">
+                                        <button class="btn waves-effect butoncolor" type="submit" name="action">Sign
+                                            in<i class="material-icons right">send</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--row-->
+                </div><!--card-->
+                <div class="row">
+                    <div class="chekbutton">
+                        <div class="col s12 m12 l12 xl12" style="">
+                            <a href="forget_password.html" class="center-align">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+

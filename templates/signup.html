@@ -1,124 +1,72 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 
+{% block css %}
+   <link rel="stylesheet" href="{% static "css/signup_login.css" %}">
+{% endblock %}
+
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col s12 offset-s3">
-                <ul class="tabs">
-                    <li class="tab col s3 ttabb"><a class="active purple-text" href="#signin">Sign In</a></li>
-                    <li class="tab col s3 ttabb"><a class="purple-text" href="#signup">Sign Up</a></li>
-                </ul>
-            </div>
-            <div id="signin" class="col s12 offset-s3">
-                <div class="col s4 m4 l4 xl4">
-                    <div class="card-panel z-depth-5"
-                         style="margin-top:50px;border:1px solid purple;border-radius:10px;">
-                        <h4 class="center purple-text" style="border:1px solid purple;border-radius:4px;">Sign In</h4>
-                        <div class="row">
-                            <form class="col s12 m12">
-                                <div class="row">
-                                    <div class="input-field col s12 m12" style="margin-bottom:0;margin-top:0;">
-                                        <i class="material-icons prefix">person</i>
-                                        <input id="icon_prefix" type="text" class="validate">
-                                        <label for="icon_prefix">Username</label>
-                                    </div>
-                                    <div class="input-field col s12 m12" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="fa fa-unlock-alt prefix"></i>
-                                        <input id="icon_password" type="password" class="validate">
-                                        <label for="icon_password">Password</label>
-                                    </div>
+<!-- templates/signup.html -->
+<div class="container">
+    <div class="row">
 
-                                    <div class="col s12 m12 l12 xl12" style="margin-top:20px;margin-bottom:-10px;">
-                                        <div class="chekbutton">
-                                            <button class="btn waves-effect purple lighten-2 z-depth-2" type="submit"
-                                                    name="action">Sign In<i class="material-icons right">send</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col s12 m12 l12 xl12 center-align"
-                                         style="margin-top:20px;margin-bottom:-10px;">
-                                        <a href="forget_password.html">Forgot password?</a>
-                                    </div>
-
-
+        <div id="signup" class="col s12 offset-s2">
+            <div class="col  s8 m8 l8 xl8">
+                <div class="card-panel hoverable z-depth-5 FORMCLS">
+                    <h4 class="center white-text FORM_HEADING_CLS">Sign Up</h4>
+                    <div class="row">
+                        <form class="col s12 m12" method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="row">
+                                <div class="input-field col s12 m12 l12 xl12 INPUT_FIELD_CLASS">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="email" type="email" class="validate" name="email">
+                                    <!-- DATA_INSERT_NAME -->
+                                    <label for="email"><span class="field_text_clr">Email</span></label>
                                 </div>
-                            </form>
-                        </div><!--row-->
-                    </div><!--card-->
-                </div>
-            </div>
-            <div id="signup" class="col s12 offset-s3">
-                <div class="col  s8 m8 l8 xl8">
-                    <div class="card-panel z-depth-5" style="border:1px solid purple;border-radius:10px;">
-                        <h4 class="center purple-text" style="border:1px solid purple;border-radius:4px;">Sign Up</h4>
-                        <div class="row">
-                            <form class="col s12 m12">
-                                <div class="row">
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="material-icons prefix">person</i>
-                                        <input id="icon_prefix" type="text" class="validate">
-                                        <label for="icon_prefix">Full Name</label>
-                                    </div>
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="material-icons prefix">place</i>
-                                        <input id="country" type="text" class="validate" name="country">
-                                        <!-- DATA_INSERT_NAME -->
-                                        <label for="country">Country</label>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6 m6 INPUT_FIELD_CLASS">
+                                    <i class="material-icons prefix">person</i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix"><span class="field_text_clr">Full Name</span></label>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="material-icons prefix">email</i>
-                                        <input id="email" type="email" class="validate" name="email">
-                                        <!-- DATA_INSERT_NAME -->
-                                        <label for="email">Email</label>
-                                    </div>
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="material-icons prefix">phone</i>
-                                        <input id="icon_prefix2" class="materialize-textarea" name="phone">
-                                        <!-- DATA_INSERT_NAME -->
-                                        <label for="icon_prefix2">Phone</label>
+                                <div class="input-field col s6 m6 INPUT_FIELD_CLASS">
+                                    <i class="material-icons prefix">place</i>
+                                    <input id="country" type="text" class="validate" name="country">
+                                    <!-- DATA_INSERT_NAME -->
+                                    <label for="country"><span class="field_text_clr">Country</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6 m6 INPUT_FIELD_CLASS">
+                                    <i class="fa fa-unlock-alt prefix"></i>
+                                    <input id="icon_password" type="password" class="validate">
+                                    <label for="icon_password"><span class="field_text_clr">Password</span></label>
+                                </div>
+                                <div class="input-field col s6 m6 INPUT_FIELD_CLASS">
+                                    <i class="fa fa-unlock-alt prefix"></i>
+                                    <input id="password" type="password" class="validate" name="confirm_password">
+                                    <!-- DATA_INSERT_NAME -->
+                                    <label for="password"><span class="field_text_clr">Confirm Password</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m12 l12 xl12" style="margin-top:10px;margin-bottom:-20px;">
+                                    <div class="chekbutton">
+                                        <button class="btn waves-effect butoncolor" type="submit" name="action">Sign
+                                            Up<i class="material-icons right">send</i></button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="fa fa-unlock-alt prefix"></i>
-                                        <input id="icon_password" type="password" class="validate">
-                                        <label for="icon_password">Password</label>
-                                    </div>
-                                    <div class="input-field col s6 m6" style="margin-bottom:0px;margin-top:0px;">
-                                        <i class="fa fa-unlock-alt prefix"></i>
-                                        <input id="password" type="password" class="validate" name="confirm_password">
-                                        <!-- DATA_INSERT_NAME -->
-                                        <label for="password">Confirm Password</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s12 m12 l12 xl12" style="margin-top:10px;margin-bottom:-20px;">
-                                        <div class="chekbutton">
-                                            <button class="btn waves-effect purple lighten-2 z-depth-2" type="submit"
-                                                    name="action">Sign Up<i class="material-icons right">send</i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div><!--row-->
-                    </div><!--card-->
-                </div>
+                            </div>
+                        </form>
+                    </div><!--row-->
+                </div><!--card-->
             </div>
         </div>
     </div>
-
-
-    <!-- templates/signup.html -->
-    <h2>Sign up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign up</button>
-    </form>
+</div>
 
 {% endblock %}
