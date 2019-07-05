@@ -53,46 +53,38 @@
     text-align: center;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+
+nav .nav-wrapper {
+    background-color: #930d0d;
+    height: 70px;
 }
 
-.contactUs {
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    border: none;
-    font: normal 56px/1 "Arizonia", Helvetica, sans-serif;
-    color: #ab47bc;
-
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
+nav {
+    background-color: #930d0d;
+    height: 70px;
+    line-height: 70px;
 }
 
-/*.parallax-container{
-	height: 400px;
-}*/
-
-.check-button {
-
-    text-align: center;
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 30px;
+    line-height: 30px;
 }
 
-.USER_ADMIN {
-    text-align: center;
+nav .button-collapse i {
+    height: 30px;
+    line-height: 30px;
+}
+  
+nav .brand-logo {
+    font-size: 1.6rem;
 }
 
-.icon-block {
-    padding: 0 15px;
+@media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 70px;
+        line-height: 70px;
+    }
 }
-
-.icon-block .material-icons {
-    font-size: inherit;
-}
-
-footer.page-footer {
-    background-color: #ab47bc;
-}
-
-/* search_result.html CSS  */
 
 .pxc{
   
@@ -182,4 +174,3 @@ footer.page-footer {
   margin-bottom:0px;
   margin-top:0px;
 }
-/* Sign_up.html CSS*/
