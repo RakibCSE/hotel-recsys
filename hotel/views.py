@@ -1,8 +1,3 @@
-import pandas as pd
-import requests
-
-from datetime import datetime
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.postgres.search import SearchVector
 from django.shortcuts import render
@@ -10,21 +5,30 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import CreateView
 
-from geoip2 import webservice
-
 from .forms import CustomUserCreationForm
 from .models import HotelDetail, UserInteraction
 from .utils import *
 
+from geoip2 import webservice
+
 
 class SignUpView(CreateView):
+    """
+    Sign up view for user signup.
+    """
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
     template_name = "signup.html"
 
 
 def save_search_data(request, query_data, booking=0):
-
+    """
+    Save user interaction data.
+    Args:
+        request:
+        query_data: Queryset data
+        booking: Hotel is booked or not
+    """
     account_id = 141975
     license_key = "Uf4x3NwFVldx"
 
@@ -80,7 +84,15 @@ def save_search_data(request, query_data, booking=0):
 
 @ csrf_exempt
 def index(request):
+    """
+    Returns search results view or return to homepage
+    Args:
+        request:
 
+    Returns:
+        request:
+        hotel_data: List of queryset.
+    """
     if request.GET:
         get_data = request.GET
 
@@ -99,7 +111,7 @@ def index(request):
         ).filter(search=place)
 
         paginator = Paginator(list(hotels_data_list), 10)
-        total_pages = paginator.num_pages
+        # total_pages = paginator.num_pages
 
         try:
             hotels_data = paginator.page(page)
@@ -116,6 +128,16 @@ def index(request):
 
 
 def hotel_view(request, hotel_id):
+    """
+    Returns hotel view page
+    Args:
+        request:
+        hotel_id: Hotel ID
+
+    Returns:
+        request:
+        hotel_data: Specific hotel queryset data.
+    """
 
     hotel_data = HotelDetail.objects.get(id=hotel_id)
 
