@@ -108,31 +108,7 @@
 {% block js %}
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
-                from: "02-06-2019",
-                to: "05-06-2019",
-                format: "dd-mm-yyyy"
-            });
-        });
 
-        $(document).ready(function () {
-            $('.parallax').parallax();
-        });
-
-        $(document).ready(function () {
-            $('.slider').slider();
-        });
-
-        $('.head-link').click(function (e) {
-            e.preventDefault();
-
-            let goto = $(this).attr('href');
-
-            $('html, body').animate({
-                scrollTop: $(goto).offset().top
-            }, 800);
-        });
 
     </script>
 {% endblock %}

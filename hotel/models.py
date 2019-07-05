@@ -33,6 +33,13 @@ class HotelDetail(models.Model):
     def thumb_urls_as_list(self):
         return self.thumb_urls.split("\n")
 
+    def star_as_integer(self):
+        star_rating = float(self.star_rating) * 20
+        return int(star_rating)
+
+    def format_price(self):
+        return "{}{}".format("$", self.hotel_price.lstrip("USD"))
+
 
 class UserInteraction(models.Model):
     user_id = models.BigIntegerField()

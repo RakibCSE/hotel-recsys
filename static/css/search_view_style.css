@@ -1,0 +1,43 @@
+.top-row {
+    margin-top: 50px;
+}
+
+.col .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.pxc {
+    height: 200px;
+    border: 1px solid #6d0707;
+    border-radius: 5px;
+}
+
+.responsive-img {
+    width: 93%;
+    height: 198px !important;
+}
+
+.col {
+    padding: 0 !important;
+}
+
+.row {
+    margin-right: 0 !important;
+    margin-bottom: 30px;
+}
+
+.hotel_name {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.hotel-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.card-panel {
+    margin: 0 20px 0 0;
+    border-radius: 0;
+}

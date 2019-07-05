@@ -2,88 +2,134 @@
 {% load staticfiles %}
 {% load hotel_tags %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/search_view_style.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            {% for hotel in hotels_data %}
-                <div class="col s9 m9" >
-					<div class="row pxc" style="">	              
-					  <div class="col s4 m4">
-						 <img src="{{ hotel.thumb_urls_as_list.3 }}" alt="{{ hotel.hotel_name }}" style="height:180px;width:300px;margin-top:10px;" />
-					  </div>
-					  <div class="col s4 m4">
-					  <a href="{% url "hotel:hotel_view" hotel.id %}" style="text-align:left;margin-right:10px;" class="blue-text">{{ hotel.hotel_name }}</a>
-						<p style="" class="HOTEL_NAME">{{ hotel.hotel_name }}</br><span style="font-weight:700;">{{ hotel.address }}, {{ hotel.district }}</span></p>
-							<div class="RATINGS"><span class="stars-container stars-{{ hotel.star_rating }}">★★★★★</span></div> <!-- rating format 0 theke 10 barte barte 100 -->
-							<p><span style="color:#000080;font-weight:750;">{{ hotel.star_rating }}</span> Very Good (32 reviews)</br><span style="color:blue;">Breakfast Included<span></p>         			
-					  </div>
-					  <div class="col s4 m4">	
-						<div class="tiu">
-							<p style="color:white;margin-top:0px;">We have three left at 10% of at</p>
-						</div>
-						<div class="PRICE_TAG">
-						  <p style="color:#000080;font-weight:700;"><span style="font-weight:400;" ><del>$130</del></span>{{ hotel.hotel_price }}</br><span style="font-weight:100;">per night</span></p>
-						</div>				
-					  </div>	  
-					</div>
-               </div> <!-- column -->
-               <div class="col s3 m3" style="margin-top:50px">
-    
-               </div> <!-- colum -->
-            {% endfor %}
 
-            {% if hotels_data.has_other_pages %}
-                <ul class="pagination">
-                    {% if hotels_data.has_previous %}
-                        <li>
-                            <a href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
-                                <i class="material-icons">chevron_left</i>
+    <div class="container">
+        <div class="row top-row">
+            <div class="col l3 m12 s12">
+                <div class="row">
+                    <div class="col l12 s12 m6">
+                        <div class="card-panel brown darken-4">
+                            <div class="input-field black-text">
+                                <i class="material-icons prefix">place</i>
+                                <input id="place_field" type="text" name="place" class="validate"
+                                       required="required">
+                                <label for="place_field">Place</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
+                                <label for="checkin_field">Check-in Date</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
+                                <label for="checkout_field">Check-Out Date</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix fa fa-bed"></i>
+                                <input id="room_field" type="text" name="room" class="validate">
+                                <label for="room_field">Rooms</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">people</i>
+                                <input id="adult_field" type="text" name="adult" class="validate">
+                                <label for="adult_field">Adults</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">child_care</i>
+                                <input id="child_field" type="text" name="children" class="validate">
+                                <label for="child_field">Children's</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col l7 m12 s12">
+                {% for hotel in hotels_data %}
+                    <div class="row pxc z-depth-1-half">
+                        <div class="col l12 m10 s12">
+                            <div class="col l6 m6 s12">
+                                <img class="responsive-img" src="{{ hotel.thumb_urls_as_list.3 }}"
+                                     alt="{{ hotel.hotel_name }}"/>
+                            </div>
+                            <div class="col l6 m6 s12">
+                                <div class="row">
+                                    <div class="col l12 m12 s12">
+                                        <a href="{% url "hotel:hotel_view" hotel.id %}"
+                                           class="hotel_name">{{ hotel.hotel_name }}</a>
+                                        <br>
+                                        {{ hotel.address }}, {{ hotel.district }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col l12 m12 s12">
+                                        <div>
+                                            <span class="stars-container stars-{{ hotel.star_as_integer }}">★★★★★</span>
+                                            <span style="color:#000080;font-weight:700;">{{ hotel.star_rating }}</span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <div class="col l6 m12 s12">
+                                        {{ hotel.review_badge }}
+                                        <br>
+                                        Breakfast Included
+                                    </div>
+                                    <div class="col l3">
+                                        <div class="right purple-text hotel-price">{{ hotel.format_price }}</div>
+                                    </div>
+                                    <div class="col l3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% if hotels_data.has_other_pages %}
+                    <div class="left">
+                        {% if hotels_data.has_previous %}
+                            <a class="waves-effect btn red darken-3"
+                               href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
+                                <i class="material-icons prefix">chevron_left</i> Previous page
                             </a>
-                        </li>
-                    {% else %}
-                        <li class="disabled"><i class="material-icons">chevron_left</i></li>
-                    {% endif %}
-                    {% for i in hotels_data.paginator.page_range %}
-                        {% if users.number == i %}
-                            <li class="active">
-                                <span>{{ i }} <span class="sr-only">(current)</span></span>
-                            </li>
-                        {% else %}
-                            <li class="waves-effect">
-                                <a href="?{% url_replace request 'page' i %}">{{ i }}</a>
-                            </li>
                         {% endif %}
-                    {% endfor %}
-                    {% if hotels_data.has_next %}
-                        <li>
-                            <a href="?{% url_replace request 'page' hotels_data.next_page_number %}">
-                                <i class="material-icons">chevron_right</i>
+                    </div>
+                    <div class="right">
+                        {% if hotels_data.has_next %}
+                            <a class="waves-effect btn red darken-3"
+                               href="?{% url_replace request 'page' hotels_data.next_page_number %}">
+                                Next page <i class="material-icons">chevron_right</i>
                             </a>
-                        </li>
-                    {% else %}
-                        <li class="disabled">
-                            <i class="material-icons">chevron_right</i>
-                        </li>
-                    {% endif %}
-                </ul>
-            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="col l2 m12 s12"></div>
         </div>
     </div>
 {% endblock %}
+
 {% block js %}
     <script type="text/javascript">
+        $(function () {
+            function addScore(score, $domElement) {
+                $("<span class='stars-container'>")
+                    .addClass("stars-" + score.toString())
+                    .text("★★★★★")
+                    .appendTo($domElement);
+            }
 
-        $(function() {
-		  function addScore(score, $domElement) {
-			$("<span class='stars-container'>")
-			  .addClass("stars-" + score.toString())
-			  .text("★★★★★")
-			  .appendTo($domElement);
-		  }
-
-         addScore(70, $("#fixture"));
+            addScore(70, $("#fixture"));
         });
-
     </script>
 {% endblock %}
