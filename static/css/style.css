@@ -1,3 +1,59 @@
+.textShadow {
+
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 75px/normal "Arizonia", Helvetica, sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    text-shadow: 0 15px 29px rgba(0, 0, 0, 0.0980392), 10px 20px 5px rgba(0, 0, 0, 0.0470588), -10px 20px 5px rgba(0, 0, 0, 0.0470588);
+    -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+
+}
+
+.textShadow:hover {
+    text-shadow: 0 -15px 29px rgba(0, 0, 0, 0.0980392), 10px -20px 5px rgba(0, 0, 0, 0.0470588), -10px -20px 5px rgba(0, 0, 0, 0.0470588);
+}
+
+.slider ul.indicators li.indicator-item.active {
+    background-color: #ab47bc;
+}
+
+.slider ul.indicators li.indicator-item {
+    background-color: #C2BDBD;
+}
+
+.nav-wrapper ul li {
+    display: inline-block;
+}
+
+.nav-wrapper {
+    text-align: center;
+}
+
+.book-now {
+    border: none;
+    font: normal 76px/1 "Arizonia", Helvetica, sans-serif;
+    color: #ba68c8;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.signin {
+    border: none;
+    font: normal 76px/1 "Arizonia", Helvetica, sans-serif;
+    color: #ba68c8;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+
 nav .nav-wrapper {
     background-color: #930d0d;
     height: 70px;
@@ -18,7 +74,7 @@ nav .button-collapse i {
     height: 30px;
     line-height: 30px;
 }
-
+  
 nav .brand-logo {
     font-size: 1.6rem;
 }
@@ -29,7 +85,6 @@ nav .brand-logo {
         line-height: 70px;
     }
 }
-
 
 /* login_sign_up.html CSS*/
 .FORMCLS {
@@ -55,4 +110,93 @@ nav .brand-logo {
 .butoncolor {
 
     background-color: #930d0d;
+}
+=======
+.pxc{
+  
+  height:200px;
+  border:1px solid grey;
+  border-radius:4px;margin-top:50px;
+  margin-left:50px;
+}
+.pxc:hover
+{
+  background-color:#e6e6e6;
+}
+.HOTEL_NAME{
+
+ text-align:left;
+ margin-right:10px;
+ font-size:18px;
+ font-weight:900;
+ color:#000080;
+}
+.tiu{
+
+ margin-top:20px;
+ text-align:center;
+ border-radius:10px;
+ background-color:green;
+ width:220px;
+ height:25px;
+ float:right;
+}
+.PRICE_TAG{
+
+ margin-top:0px;
+ text-align:right;
+ float:right;
+ width:220px;
+ height:25px;
+}
+
+/* RATINGS CSS  */
+.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: lightgray;
+}
+.stars-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: gold;
+  overflow: hidden;
+}
+.stars-0:after { width: 0%; }
+.stars-10:after { width: 10%; }
+.stars-20:after { width: 20%; }
+.stars-30:after { width: 30%; }
+.stars-40:after { width: 40%; }
+.stars-50:after { width: 50%; }
+.stars-60:after { width: 60%; }
+.stars-70:after { width: 70%; }
+.stars-80:after { width: 80%; }
+.stars-90:after { width: 90%; }
+.stars-100:after { width: 100%; }
+/* search_result.html CSS  */
+
+
+
+/* Sign_up.html CSS*/
+.FORMCLS{
+  margin-top:50px;
+  border:1px solid purple;
+  border-radius:10px;
+}
+.FORM_HEADING_CLS{
+  border:1px solid purple;
+  border-radius:4px;
+}
+.INPUT_FIELD_CLASS{
+  margin-bottom:0px;
+  margin-top:0px;
 }
