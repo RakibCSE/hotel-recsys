@@ -141,7 +141,7 @@ def hotel_view(request, hotel_id):
 
     hotel_data = HotelDetail.objects.get(id=hotel_id)
 
-    save_search_data(request, hotel_data)
+    # save_search_data(request, hotel_data)
 
     return render(request, "hotel_app/hotel_view.html", {
         'hotel_data': hotel_data,
