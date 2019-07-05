@@ -7,39 +7,30 @@
     <div class="container">
         <div class="row">
             {% for hotel in hotels_data %}
-                <div class="col s9 m9">
-                    <div class="row pxc"
-                         style="height:300px;border:1px solid grey;border-radius:4px;margin-top:50px;margin-left:50px;">
-                        <div class="col s6 m6">
-                            <img src="{{ hotel.thumb_urls_as_list.3 }}" alt="{{ hotel.hotel_name }}"
-                                 style="height:250px;width:300px;margin-top:30px;"/>
-                        </div>
-                        <div class="col s6 m6">
-                            <a href="{% url "hotel:hotel_view" hotel.id %}" style="text-align:left;margin-right:10px;" class="blue-text">{{ hotel.hotel_name }}</a>
-                            <h6>
-                                {{ hotel.star_rating }}
-                                <span class="fa fa-star checked"></span>
-                            </h6>
-                            <br>
-                            <div class="jkl">
-                                <p>{{ hotel.address }}, {{ hotel.district }}</p>
-                                <p>{{ hotel.country }}</p>
-                                <p style="text-align:left;"><span
-                                        style="font-size:15px;">{{ hotel.review_badge }}</span></p>
-                                <p style="text-align:right;font-size:20px;margin-top:-30px;">
-                                    <span>{{ hotel.hotel_price }}</span>
-                                </p>
-                                <div style="margin-top:-10px;width:250px;float:right;">
-                                    <a href="">
-                                        <p style="color:black;text-align:center;border:2px solid white;margin-top:0;background-color:white">
-                                            <span style="color:black;">see our latest available rooms</span>
-                                        </p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="col s9 m9" >
+					<div class="row pxc" style="">	              
+					  <div class="col s4 m4">
+						 <img src="{{ hotel.thumb_urls_as_list.3 }}" alt="{{ hotel.hotel_name }}" style="height:180px;width:300px;margin-top:10px;" />
+					  </div>
+					  <div class="col s4 m4">
+					  <a href="{% url "hotel:hotel_view" hotel.id %}" style="text-align:left;margin-right:10px;" class="blue-text">{{ hotel.hotel_name }}</a>
+						<p style="" class="HOTEL_NAME">{{ hotel.hotel_name }}</br><span style="font-weight:700;">{{ hotel.address }}, {{ hotel.district }}</span></p>
+							<div class="RATINGS"><span class="stars-container stars-{{ hotel.star_rating }}">★★★★★</span></div> <!-- rating format 0 theke 10 barte barte 100 -->
+							<p><span style="color:#000080;font-weight:750;">{{ hotel.star_rating }}</span> Very Good (32 reviews)</br><span style="color:blue;">Breakfast Included<span></p>         			
+					  </div>
+					  <div class="col s4 m4">	
+						<div class="tiu">
+							<p style="color:white;margin-top:0px;">We have three left at 10% of at</p>
+						</div>
+						<div class="PRICE_TAG">
+						  <p style="color:#000080;font-weight:700;"><span style="font-weight:400;" ><del>$130</del></span>{{ hotel.hotel_price }}</br><span style="font-weight:100;">per night</span></p>
+						</div>				
+					  </div>	  
+					</div>
+               </div> <!-- column -->
+               <div class="col s3 m3" style="margin-top:50px">
+    
+               </div> <!-- colum -->
             {% endfor %}
 
             {% if hotels_data.has_other_pages %}
@@ -79,4 +70,20 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+
+        $(function() {
+		  function addScore(score, $domElement) {
+			$("<span class='stars-container'>")
+			  .addClass("stars-" + score.toString())
+			  .text("★★★★★")
+			  .appendTo($domElement);
+		  }
+
+         addScore(70, $("#fixture"));
+        });
+
+    </script>
 {% endblock %}
