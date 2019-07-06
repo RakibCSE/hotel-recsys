@@ -8,7 +8,6 @@
 
 
 {% block content %}
-
     <div class="container">
         <div class="row top-row">
             <div class="col l3 m12 s12">
@@ -66,7 +65,9 @@
                                         <a href="{% url "hotel:hotel_view" hotel.id %}"
                                            class="hotel_name">{{ hotel.hotel_name }}</a>
                                         <br>
-                                        {{ hotel.address }}, {{ hotel.district }}
+                                        <div class="deep-purple-text lighten-5">
+                                            {{ hotel.address }}, {{ hotel.district }}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
