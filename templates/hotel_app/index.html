@@ -1,7 +1,61 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/search_box_style.css" %}">
+{% endblock %}
+
 {% block content %}
+    <div class="container section">
+        <h6 class="center-align search-here">Search here</h6>
+        <div class="card-panel z-depth-3">
+            <div class="row">
+                <form class="col s12 m10 l12 push-s1 push-m2" method="get" action="{% url "hotel:index" %}">
+                    <div class="row">
+                        <div class="input-field col s10 m10 l3">
+                            <i class="material-icons prefix">place</i>
+                            <input placeholder="Place" type="text" name="place" class="validate" required>
+                        </div>
+                        <div class="input-field col s10 m10 l3">
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
+                            <label for="checkin_field">Check-in Date</label>
+                        </div>
+                        <div class="input-field col s10 m10 l3">
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
+                            <label for="checkout_field">Check-Out Date</label>
+                        </div>
+                        <div class="input-field col s10 m10 l1">
+                            <i class="material-icons prefix fa fa-bed"></i>
+                            <input id="room_field" type="text" name="room" class="validate">
+                            <label for="room_field">Rooms</label>
+                        </div>
+
+                        <div class="input-field col s10 m5 l1">
+                            <i class="material-icons prefix">people</i>
+                            <input id="adult_field" type="text" name="adult" class="validate">
+                            <label for="adult_field">Adults</label>
+                        </div>
+
+                        <div class="input-field col s10 m5 l1">
+                            <i class="material-icons prefix">child_care</i>
+                            <input id="child_field" type="text" name="children" class="validate">
+                            <label for="child_field">Children's</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s10 m5 l12">
+                            <div class="search-button center">
+                                <button class="btn btn-large waves-effect red darken-3 z-depth-2" type="submit">
+                                    Check Now <i class="material-icons right">send</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div class="slider">
         <ul class="slides">
@@ -13,14 +67,14 @@
                 </div>
             </li>
             <li>
-                <img src="{% static "images/slider_3.jpg" %}"> <!-- random image -->
+                <img src="{% static "images/slider_2.jpg" %}"> <!-- random image -->
                 <div class="caption left-align">
                     <h3>DREAMS COME TRUE!</h3>
                     <h5 class="light grey-text text-lighten-3">We are Here to Help You Enjoy Your Stay.</h5>
                 </div>
             </li>
             <li>
-                <img src="{% static "images/slider_2.jpg" %}"> <!-- random image -->
+                <img src="{% static "images/slider_3.jpg" %}"> <!-- random image -->
                 <div class="caption right-align">
                     <h3>Modern & Spacious Rooms!</h3>
                     <h5 class="light grey-text text-lighten-3">Enjoy Your Holidays.</h5>
@@ -36,79 +90,4 @@
         </ul>
     </div>
 
-    {% for hotel in hotels_data %}
-        {{ hotel.hotel_name }}
-    {% endfor %}
-
-    <div id="book-now" class="container section scrollspy">
-        <h6 class="center-align book-now">Book Now</h6>
-        <div class="card-panel z-depth-5" style="border:1px solid purple;border-radius:25px;">
-            <div class="row">
-                <form class="col s12 m12 l12" method="get" action="{% url "hotel:index" %}"
-                      style="border-radius:20px;">
-                    {#                    {% csrf_token %}#}
-
-                    <div class="row">
-                        <div class="input-field col s3 m3 l3" style="margin-top:0;margin-bottom:0;">
-                            <i class="material-icons prefix">place</i>
-                            <input id="place_field" type="text" name="place" class="validate" required="required">
-                            <label for="place_field">Place</label>
-                        </div>
-                        <div class="input-field col s3 m3 l3" style="margin-top:0;margin-bottom:0;">
-                            <i class="material-icons prefix">date_range</i>
-                            <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
-                            <label for="checkin_field">Check-in Date</label>
-                        </div>
-                        <div class="input-field col s3 m3 l3" style="margin-top:0;margin-bottom:0;">
-                            <i class="material-icons prefix">date_range</i>
-                            <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
-                            <label for="checkout_field">Check-Out Date</label>
-                        </div>
-                        <div class="input-field col s3 m3 l1" style="margin-top:0;margin-bottom:0;">
-                            <input id="room_field" type="text" name="room" class="validate">
-                            <label for="room_field">Rooms</label>
-                        </div>
-
-                        <div class="input-field col s3 m3 l1" style="margin-top:0;margin-bottom:0;">
-                            <input id="adult_field" type="text" name="adult" class="validate">
-                            <label for="adult_field">Adults</label>
-                        </div>
-
-                        <div class="input-field col s3 m3 l1" style="margin-top:0;margin-bottom:0;">
-                            <input id="child_field" type="text" name="children" class="validate">
-                            <label for="child_field">Children's</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12 m12 l12 xl12" style="margin-bottom:0;margin-top:0;">
-                            <div class="check-button">
-                                <button class="btn waves-effect purple lighten-2 z-depth-2" type="submit">
-                                    Check Now <i class="material-icons right">send</i></button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- templates/home.html -->
-    <h1>Django Login Mega-Tutorial</h1>
-    {% if user.is_authenticated %}
-        <p>Hi {{ user.username }}
-        <p><a href="{% url 'logout' %}">Log out</a></p>
-    {% else %}
-        <p><a href="{% url 'hotel:signup' %}">Sign Up</a></p>
-        <p><a href="{% url 'login' %}">Log In </a></p>
-    {% endif %}
-
-
-{% endblock %}
-
-{% block js %}
-    <script type="text/javascript">
-
-
-
-    </script>
 {% endblock %}

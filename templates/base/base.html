@@ -7,17 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 
-    <!-- Import Google Icon Font -->
+    <!-- Google Icon Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Import Materialize CSS -->
+    <!-- Materialize CSS -->
     <link rel="stylesheet" href="{% static "css/materialize.min.css" %}">
-    <!-- Import Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Akronim" data-generated="http://enjoycss.com"
-          type="text/css"/>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arizonia" data-generated="http://enjoycss.com"
-          type="text/css"/>
-
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="{% static "css/all.min.css" %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 
@@ -32,11 +27,17 @@
         <div class="nav-wrapper">
             <div class="container">
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <img src="{% static 'images/site_logo.png' %}" alt="website logo" class="brand-logo">
+                <a href="{% url "hotel:index" %}">
+                    <img src="{% static 'images/site_logo.png' %}" alt="website logo" class="brand-logo">
+                </a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">JavaScript</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url "logout" %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url "hotel:signup" %}">Sign up</a></li>
+                        <li><a href="{% url "login" %}">Log in</a></li>
+                    {% endif %}
+                    <li><a href="#">About Us</a></li>
                 </ul>
             </div>
         </div>
@@ -46,8 +47,8 @@
 <ul class="sidenav" id="mobile-demo">
     <li>
         <div class="user-view">
-            <div class="background">
-                <img src="images/office.jpg">
+            <div class="background center">
+                <img src="/static/images/site_logo.png">
             </div>
             <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
             <a href="#name"><span class="white-text name">John Doe</span></a>
@@ -61,22 +62,27 @@
     </li>
     <li><a class="subheader">Subheader</a></li>
     <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    <li><a class="waves-effect" href="{% url "hotel:signup" %}">Sign Up</a></li>
+    <li><a class="waves-effect" href="{% url "login" %}">Login</a></li>
 </ul>
 <!-- Navbar End -->
 
-<div class="container">
-    <!-- Content Start -->
-    {% block content %} {% endblock %}
-    <!-- Content End -->
-</div>
+
+<!-- Content Start -->
+{% block content %} {% endblock %}
+<!-- Content End -->
 
 
 <!-- Import JQuery JS -->
 <script src="{% static "js/jquery-3.1.1.min.js" %}"></script>
 <!-- Import Materialize JS -->
 <script src="{% static "js/materialize.min.js" %}"></script>
+<!-- Font Awesome JS -->
+<script src="{% static "js/all.min.js" %}"></script>
 <!-- Custom JS -->
 <script src="{% static "js/custom.js" %}"></script>
+
 {% block js %}  {% endblock %}
+
 </body>
 </html>

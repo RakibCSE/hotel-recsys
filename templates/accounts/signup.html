@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/signup_login.css" %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col l8 m10 s12 push-l2 push-m1">
+                <div class="card-panel hoverable z-depth-5 auth-form">
+                    <h4 class="center white-text form-heading">Sign Up</h4>
+                    <p class="divider white">
+                    <div class="row">
+                        <form class="col l12 s12 m12" method="post" action="{% url "hotel:signup" %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="material-icons prefix fa fa-user"></i>
+                                    <input id="id_username" type="text" name="username" class="validate" required>
+                                    <label for="id_username" class="white-text">Username</label>
+                                </div>
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="material-icons prefix fa fa-user-circle"></i>
+                                    <input id="id_fullname" type="text" name="fullname" class="validate" required>
+                                    <label for="id_fullname" class="white-text">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="id_email" type="email" name="email" class="validate" required>
+                                    <label for="id_email" class="white-text">Email</label>
+                                </div>
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="material-icons prefix">place</i>
+                                    <input id="id_country" type="text" class="validate" name="country" required>
+                                    <label for="id_country" class="white-text">Country</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="fa fa-unlock-alt prefix"></i>
+                                    <input id="id_password1" type="password" name="password1" class="validate"
+                                           required>
+                                    <label for="id_password1" class="white-text">Password</label>
+                                </div>
+                                <div class="input-field col l6 m6 s10 push-s1">
+                                    <i class="fa fa-unlock-alt prefix"></i>
+                                    <input id="id_password2" type="password" class="validate" name="password2"
+                                           required>
+                                    <label for="id_password2" class="white-text">Confirm Password</label>
+                                </div>
+                            </div>
+                            <div class="row center">
+                                <div class="col s12 m12 l12 button-submit">
+                                    <button class="btn waves-effect" type="submit" name="action">Sign
+                                        Up<i class="material-icons right">send</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--row-->
+                </div><!--card-->
+            </div>
+        </div>
+    </div>
+{% endblock %}

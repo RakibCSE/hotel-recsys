@@ -10,7 +10,6 @@
 .pxc {
     height: 200px;
     border: 1px solid #6d0707;
-    border-radius: 5px;
 }
 
 .responsive-img {
@@ -28,8 +27,8 @@
 }
 
 .hotel_name {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .hotel-price {
