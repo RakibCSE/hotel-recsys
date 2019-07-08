@@ -4,6 +4,7 @@ html {
 
 .container {
     width: 90%;
+    max-width: 2200px;
 }
 
 /* RATINGS CSS START */
@@ -97,14 +98,6 @@ html {
 
 .slider ul.indicators li.indicator-item {
     background-color: #C2BDBD;
-}
-
-.search-here {
-    border: none;
-    font: normal 3.5rem "Arizonia", Helvetica, sans-serif;
-    color: #930d0d;
-    text-align: center;
-    text-overflow: ellipsis;
 }
 
 /*NAVBAR CSS*/
