@@ -92,26 +92,26 @@
                 </div>
             {% endfor %}
 
-            {% if hotels_data.has_other_pages %}
-                <div class="left">
-                    {% if hotels_data.has_previous %}
-                        <a class="waves-effect btn red darken-3"
-                           href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
-                            <i class="material-icons prefix">chevron_left</i> Previous page
-                        </a>
-                    {% endif %}
-                </div>
-                <div class="right">
-                    {% if hotels_data.has_next %}
-                        <button class="waves-effect btn red darken-3">
-                            <a class="white-text"
-                               href="?{% url_replace request 'page' hotels_data.next_page_number %}">
-                                Next page <i class="material-icons prefix">chevron_right</i>
+            <div class="row bottom-row">
+                {% if hotels_data.has_other_pages %}
+                    <div class="left">
+                        {% if hotels_data.has_previous %}
+                                <a class="waves-effect waves-light btn btn-large red darken-3 white-text"
+                                   href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
+                                    <i class="material-icons left">chevron_left</i> Previous page
+                                </a>
+                        {% endif %}
+                    </div>
+                    <div class="right">
+                        {% if hotels_data.has_next %}
+                            <a class="waves-effect waves-light btn btn-large red darken-3 white-text"
+                               href="?{% url_replace request 'page' hotels_data.next_page_number %}">Next Page
+                                <i class="material-icons right">chevron_right</i>
                             </a>
-                        </button>
-                    {% endif %}
-                </div>
-            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
