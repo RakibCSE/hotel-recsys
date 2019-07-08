@@ -1,7 +1,254 @@
 {% extends "base/base.html" %}
+{% load staticfiles %}
+{% load hotel_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/hotel_view.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <h1>
-        Hello!! Data Found!
-    </h1>
+<!-- Image Gallery -->
+
+<div class="container">
+    <div class="row" style="margin-top:10px;">
+        <div class="col l9 m12 s12">
+            <div class="row" style="margin-bottom:0px;">
+                <div class="col s12 m12 l12 xl12">
+                    <a href="#!" class="breadcrumb naamme">HOME</a>
+                    <a href="#!" class="breadcrumb naamme">Bangladesh</a>
+                    <a href="#!" class="breadcrumb naamme">Chittagong</a>
+                    <a href="#!" class="breadcrumb naamme"><span style="color:black;">Well Park Residence Boutique Hotel & Suites</span></a>
+                </div>
+
+            </div>
+
+            <div class="row cenetr-align navigate">
+                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
+                    <a href=""><span class="n-a-v">Info prices</span></a>
+                </div>
+                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
+                    <a href=""><span class="n-a-v">Facilities</span></a>
+                </div>
+                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
+                    <a href=""><span class="n-a-v">House rules</span></a>
+                </div>
+                <div class="col s3 m3 l3 xl3 center align" style="height:50px;">
+                    <a href="#reviews" class="head-link"><span class="n-a-v">Guest reviews</span></a>
+                </div>
+            </div>
+            <div class="row">
+
+                <h5 class="heaaading">Well Park Residence Boutique Hotel & Suites <span
+                        class="stars-container stars-90">★★★★★</span></br>
+                    <span style="font-size:15px;font-weight:650;">
+	   Plot # 02, Road # 01, O.R. Nizam Road, Chittagong, 4000 Chittagong, Bangladesh</span></br><span class="tagprice">Price:$143 <span
+                            style="font-weight:400;">per night</span></span></h5>
+                <div class="con left-align">
+                    <span class="yes">Rate this Hotel</span>
+                    <i class="fa fa-star" aria-hidden="true" id="s1"></i>
+                    <i class="fa fa-star" aria-hidden="true" id="s2"></i>
+                    <i class="fa fa-star" aria-hidden="true" id="s3"></i>
+                    <i class="fa fa-star" aria-hidden="true" id="s4"></i>
+                    <i class="fa fa-star" aria-hidden="true" id="s5"></i></br>
+                    <a href="#your-review" class="head-link"><span style="color:teal;">Send Your Opinion about This Hotel</span></a>
+                </div>
+                <div class="hide-on-med-and-up" style="float:left;"><a href="#booknow"
+                                                                       class="head-link waves-effect white-text waves-teal btn-flat button-color">Book</a>
+                </div>
+            </div>
+            <div class="row card">
+
+                <div class="col s12 m6 l4">
+                    <img src="images/a.jpeg" class="materialbox responsive-img card">
+                </div>
+                <div class="col s12 m6 l4">
+                    <img src="images/b.jpeg" class="materialbox responsive-img card">
+                </div>
+                <div class="col s12 m6 l4">
+                    <img src="images/c.jpeg" class="materialbox responsive-img card">
+                </div>
+
+
+                <div class="col s12 m6 l4">
+                    <img src="images/d.jpeg" class="materialbox responsive-img card">
+                </div>
+
+                <div class="col s12 m6 l4">
+                    <img src="images/e.jpeg" class="materialbox responsive-img card">
+                </div>
+                <div class="col s12 m6 l4">
+                    <img src="images/f.jpeg" class="materialbox responsive-img card">
+                </div>
+
+            </div>
+            <div class="row">
+                <i class="tiny material-icons">smoke_free</i> <span class="signss">No-Smoking</span> <i
+                    class="tiny material-icons">signal_wifi_4_bar</i> <span class="signss">Free Wifi</span> <i
+                    class="tiny material-icons">local_parking</i> <span class="signss">Free Parking</span> <i
+                    class="tiny material-icons">pool</i> <span class="signss">Pool</span>
+            </div>
+            <div class="divider grey"></div>
+            <div class="row">
+                <div class="col s12 m4 l3">
+                    <h5 class="yes">Main amenities</h5>
+                    <ul>
+                        <li>222 smoke-free guestrooms</li>
+                        <li>3 restaurants and 3 bars/lounges</li>
+                        <li>Outdoor pool</li>
+                        <li>Rooftop terrace</li>
+                        <li>Breakfast available</li>
+                        <li>24-hour fitness center</li>
+                        <li>Spa services</li>
+                        <li>24-hour business center</li>
+                        <li>In-room childcare</li>
+                        <li>24-hour front desk</li>
+                        <li>Air conditioning</li>
+                        <li>Daily housekeeping</li>
+                        <li>Free WiFi and free parking</li>
+                    </ul>
+                </div>
+                <div class="col s12 m4 l3">
+                    <h5 class="yes">For families</h5>
+                    <ul>
+                        <li>Free cribs/infant beds</li>
+                        <li>In-room childcare (surcharge)</li>
+                        <li>Babysitting or childcare (surcharge)</li>
+                        <li>Connecting/adjoining rooms available</li>
+                        <li>Private bathroom</li>
+                        <li>Separate bathtub and shower</li>
+                    </ul>
+                </div>
+                <div class="col s12 m4 l3">
+                    <h5 class="yes">Top spots nearby</h5>
+                    <ul>
+                        <li>Free cribs/infant beds</li>
+                        <li>In-room childcare (surcharge)</li>
+                        <li>Babysitting or childcare (surcharge)</li>
+                        <li>Connecting/adjoining rooms available</li>
+                        <li>Private bathroom</li>
+                        <li>Separate bathtub and shower</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col l3 m12 s12">
+            <div class="row" style="margin-top:30px;">
+                <div class="col l12 s12 m6">
+                    <form class="card-panel romreserve" method="post">
+                        <h6 style="color:white;font-weight:700;" id="booknow">For Reservation</h6>
+                        <div class="input-field black-text">
+                            <i class="material-icons prefix">place</i>
+                            <input id="place_field" type="text" name="place" class="validate"
+                                   required="required">
+                            <label for="place_field"><span class="field-input">Place</span></label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
+                            <label for="checkin_field"><span class="field-input">Check-in Date</span></label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">date_range</i>
+                            <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
+                            <label for="checkout_field"><span class="field-input">Check-Out Date<span></label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix fa fa-bed"></i>
+                            <input id="room_field" type="text" name="room" class="validate">
+                            <label for="room_field"><span class="field-input">Rooms</span></label>
+                        </div>
+
+                        <div class="input-field">
+                            <i class="material-icons prefix">people</i>
+                            <input id="adult_field" type="text" name="adult" class="validate">
+                            <label for="adult_field"><span class="field-input">Adults</span></label>
+                        </div>
+
+                        <div class="input-field">
+                            <i class="material-icons prefix">child_care</i>
+                            <input id="child_field" type="text" name="children" class="validate">
+                            <label for="child_field"><span class="field-input">Children's</span></label>
+                        </div>
+                        <div class="center-align">
+                            <button class="btn waves-effect waves-light button-color" type="submit" name="action">Book
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="your-review">
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+                    <label for="textarea2">Your Review</label>
+                </div>
+                <div class="center-align col s12 m12 l12">
+                    <button class="btn waves-effect waves-light button-color" type="submit" name="action">Send
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="reviews">
+            review block
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script src="js/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.materialbox').materialbox();
+
+    });
+    $(document).ready(function () {
+        $("#s1").click(function () {
+            $(".fa-star").css("color", "black");
+            $("#s1").css("color", "red");
+        });
+        $("#s2").click(function () {
+            $(".fa-star").css("color", "black");
+            $("#s1,#s2").css("color", "red");
+        });
+        $("#s3").click(function () {
+            $(".fa-star").css("color", "black");
+            $("#s1,#s2,#s3").css("color", "red");
+        });
+        $("#s4").click(function () {
+            $(".fa-star").css("color", "black");
+            $("#s1,#s2,#s3,#s4").css("color", "red");
+        });
+        $("#s5").click(function () {
+            $(".fa-star").css("color", "black");
+            $("#s1,#s2,#s3,#s4,#s5").css("color", "red");
+        });
+    });
+
+
+    $('.head-link').click(function (e) {
+        e.preventDefault();
+
+        var goto = $(this).attr('href');
+
+        $('html, body').animate({
+            scrollTop: $(goto).offset().top
+        }, 800);
+    });
+    $(document).ready(function () {
+        $('.datepicker').datepicker();
+    });
+</script>
+
+
 {% endblock %}
