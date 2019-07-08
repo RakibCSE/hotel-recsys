@@ -8,114 +8,110 @@
 
 
 {% block content %}
-    <div class="container">
-        <div class="row top-row">
-            <div class="col l3 m12 s12">
-                <div class="row">
-                    <div class="col l12 s12 m6">
-                        <div class="card-panel brown darken-4">
-                            <div class="input-field black-text">
-                                <i class="material-icons prefix">place</i>
-                                <input id="place_field" type="text" name="place" class="validate"
-                                       required="required">
-                                <label for="place_field">Place</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">date_range</i>
-                                <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
-                                <label for="checkin_field">Check-in Date</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix">date_range</i>
-                                <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
-                                <label for="checkout_field">Check-Out Date</label>
-                            </div>
-                            <div class="input-field">
-                                <i class="material-icons prefix fa fa-bed"></i>
-                                <input id="room_field" type="text" name="room" class="validate">
-                                <label for="room_field">Rooms</label>
-                            </div>
+    <div class="container top-row">
+        <div class="card-panel search-box z-depth-0">
+            <div class="row ">
+                <form class="col s12 m10 l12 push-s1 push-m2" method="get" action="{% url "hotel:index" %}">
+                    <div class="row">
+                        <div class="input-field col s10 m10 l3 large3">
+                            <i class="material-icons prefix">place</i>
+                            <input placeholder="Place" type="text" name="place" class="validate" required>
+                        </div>
+                        <div class="input-field col s10 m5 l3 large3">
+                            <i class="material-icons prefix">date_range</i>
+                            <input placeholder="Check in" type="text" name="check_in_date" class="datepicker">
+                        </div>
+                        <div class="input-field col s10 m5 l3 large3">
+                            <i class="material-icons prefix">date_range</i>
+                            <input placeholder="Check out" type="text" name="check_out_date" class="datepicker">
+                        </div>
+                        <div class="input-field col s10 m10 l1 large1">
+                            <i class="material-icons prefix">airline_seat_individual_suite</i>
+                            <input placeholder="Rooms" type="text" name="room" class="validate">
+                        </div>
 
-                            <div class="input-field">
-                                <i class="material-icons prefix">people</i>
-                                <input id="adult_field" type="text" name="adult" class="validate">
-                                <label for="adult_field">Adults</label>
-                            </div>
+                        <div class="input-field col s10 m5 l1 large1">
+                            <i class="material-icons prefix">people</i>
+                            <input placeholder="Adults" type="text" name="adult" class="validate">
+                        </div>
 
-                            <div class="input-field">
-                                <i class="material-icons prefix">child_care</i>
-                                <input id="child_field" type="text" name="children" class="validate">
-                                <label for="child_field">Children's</label>
+                        <div class="input-field col s10 m5 l1 large1">
+                            <i class="material-icons prefix">child_care</i>
+                            <input placeholder="Child's" type="text" name="children" class="validate">
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <div class="col s10 m5 l12 push-m3 search-button">
+                            <button class="btn btn-large waves-effect red darken-3 z-depth-2" type="submit">
+                                Check Now <i class="material-icons right">send</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="top-row">
+            {% for hotel in hotels_data %}
+                <div class="card-panel z-depth-5">
+                    <div class="row">
+                        <div class="col l5 m5 s12 hotel-detail-col">
+                            <img class="responsive-img" src="{{ hotel.thumb_urls_as_list.3 }}"
+                                 alt="{{ hotel.hotel_name }}"/>
+                        </div>
+                        <div class="col l7 m7 s12">
+                            <div class="row">
+                                <div class="col l12 m12 s12">
+                                    <a href="{% url "hotel:hotel_view" hotel.id %}"
+                                       class="hotel_name">{{ hotel.hotel_name }}
+                                    </a>
+                                    <div class="deep-purple-text lighten-5">
+                                        {{ hotel.address }}, {{ hotel.district }}
+                                    </div>
+                                    <div>
+                                        <span class="stars-container stars-{{ hotel.star_as_integer }}">★★★★★</span>
+                                        <span style="color:#000080;font-weight:700;">{{ hotel.star_rating }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blank"></div>
+                            <div class="row">
+                                <div class="col l6 m6 s6">
+                                    <div>
+                                        <strong>{{ hotel.review_badge }}</strong>
+                                    </div>
+                                    <div class="black-text darken-4">
+                                        Breakfast Included
+                                    </div>
+                                </div>
+                                <div class="col l6 m6 s6">
+                                    <div class="right purple-text hotel-price">{{ hotel.format_price }}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col l7 m12 s12">
-                {% for hotel in hotels_data %}
-                    <div class="row pxc z-depth-1-half">
-                        <div class="col l12 m10 s12">
-                            <div class="col l6 m6 s12">
-                                <img class="responsive-img" src="{{ hotel.thumb_urls_as_list.3 }}"
-                                     alt="{{ hotel.hotel_name }}"/>
-                            </div>
-                            <div class="col l6 m6 s12">
-                                <div class="row">
-                                    <div class="col l12 m12 s12">
-                                        <a href="{% url "hotel:hotel_view" hotel.id %}"
-                                           class="hotel_name">{{ hotel.hotel_name }}</a>
-                                        <br>
-                                        <div class="deep-purple-text lighten-5">
-                                            {{ hotel.address }}, {{ hotel.district }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col l12 m12 s12">
-                                        <div>
-                                            <span class="stars-container stars-{{ hotel.star_as_integer }}">★★★★★</span>
-                                            <span style="color:#000080;font-weight:700;">{{ hotel.star_rating }}</span>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="col l6 m12 s12">
-                                        {{ hotel.review_badge }}
-                                        <br>
-                                        Breakfast Included
-                                    </div>
-                                    <div class="col l3">
-                                        <div class="right purple-text hotel-price">{{ hotel.format_price }}</div>
-                                    </div>
-                                    <div class="col l3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+            {% endfor %}
 
-                {% if hotels_data.has_other_pages %}
-                    <div class="left">
-                        {% if hotels_data.has_previous %}
-                            <a class="waves-effect btn red darken-3"
-                               href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
-                                <i class="material-icons prefix">chevron_left</i> Previous page
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="right">
-                        {% if hotels_data.has_next %}
-                            <a class="waves-effect btn red darken-3"
+            {% if hotels_data.has_other_pages %}
+                <div class="left">
+                    {% if hotels_data.has_previous %}
+                        <a class="waves-effect btn red darken-3"
+                           href="?{% url_replace request 'page' hotels_data.previous_page_number %}">
+                            <i class="material-icons prefix">chevron_left</i> Previous page
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="right">
+                    {% if hotels_data.has_next %}
+                        <button class="waves-effect btn red darken-3">
+                            <a class="white-text"
                                href="?{% url_replace request 'page' hotels_data.next_page_number %}">
-                                Next page <i class="material-icons">chevron_right</i>
+                                Next page <i class="material-icons prefix">chevron_right</i>
                             </a>
-                        {% endif %}
-                    </div>
-                {% endif %}
-
-            </div>
-            <div class="col l2 m12 s12"></div>
+                        </button>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
