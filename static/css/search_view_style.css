@@ -49,8 +49,7 @@ input:focus {
 }
 
 .card-panel {
-    height: inherit !important;
-    padding:0;
+    padding: 0;
     margin: 0 0 20px 0;
 }
 
@@ -61,6 +60,11 @@ input:focus {
 
 .blank {
     margin: 8%;
+}
+
+.bottom-row {
+    margin-top: 45px;
+    margin-bottom: 40px;
 }
 
 @media only screen and (min-width: 991px) {
