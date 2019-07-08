@@ -19,7 +19,15 @@ input:focus {
     border-radius: 5px;
 }
 
-@media only screen and (min-width: 1024px) {
+.search-here {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 200;
+    color: #930d0d;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 991px) {
     .row .col.l3 {
         width: 18.3% !important;
     }
