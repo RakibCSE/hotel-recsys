@@ -1,42 +1,74 @@
+input {
+    margin-bottom: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.input-field {
+    margin: 1px 0 1px 0;
+    border: 2px solid #930d0d;
+    border-radius: 5px;
+}
+
 .top-row {
     margin-top: 50px;
 }
 
-.col .row{
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.pxc {
-    height: 200px;
-    border: 1px solid #6d0707;
-}
-
-.responsive-img {
-    width: 93%;
-    height: 198px !important;
-}
-
-.col {
-    padding: 0 !important;
-}
-
-.row {
-    margin-right: 0 !important;
-    margin-bottom: 30px;
-}
-
 .hotel_name {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
 }
 
 .hotel-price {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 800;
 }
 
+.search-box {
+    padding: 0;
+    margin: 0;
+}
+
+.search-button {
+    padding: 20px !important;
+}
+
+.row {
+    margin: 0;
+    padding: 0;
+}
+
+.col {
+    margin: 0;
+    padding: 0;
+}
+
 .card-panel {
-    margin: 0 20px 0 0;
-    border-radius: 0;
+    height: inherit !important;
+    padding:0;
+    margin: 0 0 20px 0;
+}
+
+.hotel-detail-col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.blank {
+    margin: 8%;
+}
+
+@media only screen and (min-width: 991px) {
+    .row .col.large3 {
+        width: 18.3% !important;
+    }
+
+    .row .col.large1 {
+        width: 15% !important;
+    }
 }
