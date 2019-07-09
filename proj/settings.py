@@ -2,8 +2,6 @@
 import json
 import os
 
-import django-heroku
-
 from celery.schedules import crontab
 
 
@@ -155,5 +153,3 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='50')
     },
 }
-
-django_heroku.settings(locals())
