@@ -3,7 +3,7 @@ import json
 import os
 
 import django_heroku
-import dj-database-url
+import dj_database_url
 
 from celery.schedules import crontab
 
