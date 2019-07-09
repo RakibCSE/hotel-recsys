@@ -1,0 +1,54 @@
+body {
+    background-image: url("/static/images/anton-repponen-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.auth-form {
+    margin-top: 50px;
+    background-color: #930d0d;
+    margin-bottom: 50px;
+}
+
+.form-heading {
+    font-weight: 600;
+}
+
+.input-field {
+    color: white;
+    margin-bottom: 6px;
+    margin-top: 0;
+}
+
+.button-submit {
+    margin-top: 10px;
+    margin-bottom: -20px;
+}
+
+.position-right {
+    float: right !important;
+    padding-right: 10px;
+}
+
+@media only screen and (max-width: 601px) {
+    .container {
+        width: 100%;
+    }
+
+    .row .col {
+        padding: 0;
+    }
+
+    .row {
+        margin-bottom: 0;
+    }
+
+    .button-submit {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .input-field {
+        margin-bottom: 8px;
+    }
+}
