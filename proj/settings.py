@@ -20,10 +20,10 @@ except FileNotFoundError:
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "gi&0-buw2(^v3#u%-k6xn^s(9p6s^g_p-_1=m18p3s=wm)1qlb"
+SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG", False)
 
 ALLOWED_HOSTS = ['*']
 
