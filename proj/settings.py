@@ -2,8 +2,9 @@
 import json
 import os
 
-from celery.schedules import crontab
+import django-heroku
 
+from celery.schedules import crontab
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -81,32 +82,6 @@ WSGI_APPLICATION = 'proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-if 'TRAVIS' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'travisci',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': 'hotel-recsys.herokuapp.com',
-            'PORT': '',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'NAME': JSON_DATA['db_name'],
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'USER': JSON_DATA['db_user'],
-            'PASSWORD': JSON_DATA['db_password'],
-            'ATOMIC_REQUESTS': True,
-            'HOST': 'hotel-recsys.herokuapp.com',
-            'PORT': '',
-            'CONN_MAX_AGE': 600,
-        }
-    }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -180,3 +155,5 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='50')
     },
 }
+
+django_heroku.settings(locals())
