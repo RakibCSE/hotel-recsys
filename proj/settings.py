@@ -1,11 +1,9 @@
-
 import json
 import os
 
 import django_heroku
 
 from celery.schedules import crontab
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,7 +15,6 @@ except FileNotFoundError:
     with open(BASE_DIR + "/" + "config.json", "r") as file:
         JSON_DATA = json.load(file)
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -28,7 +25,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 DEBUG = os.environ.get("DEBUG", True)
 
 ALLOWED_HOSTS = ['*', 'hotel-recsys.herokuapp.com']
-
 
 # Application definition
 
@@ -78,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'proj.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -123,7 +118,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -147,7 +141,6 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 INTERNAL_IPS = JSON_DATA["internal_ip"]
 
-
 # Celery application definitions
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
@@ -155,7 +148,7 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Dhaka'
-CELERY_IMPORTS = ('ml_engine.tasks', )
+CELERY_IMPORTS = ('ml_engine.tasks',)
 CELERY_BEAT_SCHEDULE = {
     'main': {
         'task': 'ml_engine.tasks.main',
