@@ -5,6 +5,7 @@ import os
 from celery.schedules import crontab
 
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
 
-ALLOWED_HOSTS = ['*','hotel-recsys.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*', 'hotel-recsys.herokuapp.com']
 
 
 # Application definition
@@ -87,7 +88,7 @@ if 'TRAVIS' in os.environ:
             'NAME': 'travisci',
             'USER': 'postgres',
             'PASSWORD': '',
-            'HOST': 'localhost',
+            'HOST': 'hotel-recsys.herokuapp.com',
             'PORT': '',
         }
     }
@@ -99,7 +100,7 @@ else:
             'USER': JSON_DATA['db_user'],
             'PASSWORD': JSON_DATA['db_password'],
             'ATOMIC_REQUESTS': True,
-            'HOST': 'localhost',
+            'HOST': 'hotel-recsys.herokuapp.com',
             'PORT': '',
             'CONN_MAX_AGE': 600,
         }
