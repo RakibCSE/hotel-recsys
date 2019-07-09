@@ -22,21 +22,6 @@
                 </div>
 
             </div>
-
-            <div class="row cenetr-align navigate">
-                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
-                    <a href=""><span class="n-a-v">Info prices</span></a>
-                </div>
-                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
-                    <a href=""><span class="n-a-v">Facilities</span></a>
-                </div>
-                <div class="col s3 m3 l3 xl3 center align" style="height:50px;border-right:1px solid white;">
-                    <a href=""><span class="n-a-v">House rules</span></a>
-                </div>
-                <div class="col s3 m3 l3 xl3 center align" style="height:50px;">
-                    <a href="#reviews" class="head-link"><span class="n-a-v">Guest reviews</span></a>
-                </div>
-            </div>
             <div class="row">
 
                 <h5 class="heaaading">Well Park Residence Boutique Hotel & Suites <span
@@ -53,8 +38,56 @@
                     <i class="fa fa-star" aria-hidden="true" id="s5"></i></br>
                     <a href="#your-review" class="head-link"><span style="color:teal;">Send Your Opinion about This Hotel</span></a>
                 </div>
-                <div class="hide-on-med-and-up" style="float:left;"><a href="#booknow"
-                                                                       class="head-link waves-effect white-text waves-teal btn-flat button-color">Book</a>
+                <div class="" style="float:left;"><a href="#booknow"
+                                                     class="modal-trigger waves-effect white-text waves-teal btn-flat button-color">Book</a>
+                </div>
+                <!-- Modal Structure -->
+                <div id="booknow" class="modal">
+                    <div class="modal-content">
+                        <form class="card-panel romreserve" method="post">
+                            <h6 style="color:white;font-weight:700;" id="booknow">For Reservation</h6>
+                            <div class="input-field black-text">
+                                <i class="material-icons prefix">place</i>
+                                <input id="place_field" type="text" name="place" class="validate"
+                                       required="required">
+                                <label for="place_field"><span class="field-input">Place</span></label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
+                                <label for="checkin_field"><span class="field-input">Check-in Date</span></label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
+                                <label for="checkout_field"><span class="field-input">Check-Out Date<span></label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix fa fa-bed"></i>
+                                <input id="room_field" type="text" name="room" class="validate">
+                                <label for="room_field"><span class="field-input">Rooms</span></label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">people</i>
+                                <input id="adult_field" type="text" name="adult" class="validate">
+                                <label for="adult_field"><span class="field-input">Adults</span></label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">child_care</i>
+                                <input id="child_field" type="text" name="children" class="validate">
+                                <label for="child_field"><span class="field-input">Children's</span></label>
+                            </div>
+                            <div class="center-align">
+                                <button class="btn waves-effect waves-light button-color" type="submit" name="action">
+                                    Book
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
             <div class="row card">
@@ -132,53 +165,6 @@
                 </div>
             </div>
         </div>
-        <div class="col l3 m12 s12">
-            <div class="row" style="margin-top:30px;">
-                <div class="col l12 s12 m6">
-                    <form class="card-panel romreserve" method="post">
-                        <h6 style="color:white;font-weight:700;" id="booknow">For Reservation</h6>
-                        <div class="input-field black-text">
-                            <i class="material-icons prefix">place</i>
-                            <input id="place_field" type="text" name="place" class="validate"
-                                   required="required">
-                            <label for="place_field"><span class="field-input">Place</span></label>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">date_range</i>
-                            <input id="checkin_field" type="text" name="check_in_date" class="datepicker">
-                            <label for="checkin_field"><span class="field-input">Check-in Date</span></label>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">date_range</i>
-                            <input id="checkout_field" type="text" name="check_out_date" class="datepicker">
-                            <label for="checkout_field"><span class="field-input">Check-Out Date<span></label>
-                        </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix fa fa-bed"></i>
-                            <input id="room_field" type="text" name="room" class="validate">
-                            <label for="room_field"><span class="field-input">Rooms</span></label>
-                        </div>
-
-                        <div class="input-field">
-                            <i class="material-icons prefix">people</i>
-                            <input id="adult_field" type="text" name="adult" class="validate">
-                            <label for="adult_field"><span class="field-input">Adults</span></label>
-                        </div>
-
-                        <div class="input-field">
-                            <i class="material-icons prefix">child_care</i>
-                            <input id="child_field" type="text" name="children" class="validate">
-                            <label for="child_field"><span class="field-input">Children's</span></label>
-                        </div>
-                        <div class="center-align">
-                            <button class="btn waves-effect waves-light button-color" type="submit" name="action">Book
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row">
         <div id="your-review">
@@ -247,6 +233,23 @@
     });
     $(document).ready(function () {
         $('.datepicker').datepicker();
+    });
+    })
+    ;
+    $(document).ready(function () {
+        $('.modal').modal();
+    });
+
+
+    $(function () {
+        function addScore(score, $domElement) {
+            $("<span class='stars-container'>")
+                .addClass("stars-" + score.toString())
+                .text("★★★★★")
+                .appendTo($domElement);
+        }
+
+        addScore(70, $("#fixture"));
     });
 </script>
 
