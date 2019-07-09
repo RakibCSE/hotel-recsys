@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['hotel-recsys.herokuapp.com']
 
 
 # Application definition
