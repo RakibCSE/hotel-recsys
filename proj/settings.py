@@ -22,9 +22,9 @@ except FileNotFoundError:
 SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", True)
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = ['*', 'hotel-recsys.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'hotel-recsys.herokuapp.com']
 
 # Application definition
 
