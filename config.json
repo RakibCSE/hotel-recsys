@@ -1,8 +1,8 @@
 {
   "secret_key": "gi&0-buw2(^v3#u%-k6xn^s(9p6s^g_p-_1=m18p3s=wm)1qlb",
-  "db_name": "hoteldb",
-  "db_user": "hoteldb_user",
-  "db_password": "user1234",
+  "db_name": "",
+  "db_user": "",
+  "db_password": "",
   "internal_ip": "",
   "email_host_user": "",
   "email_host_password": ""
