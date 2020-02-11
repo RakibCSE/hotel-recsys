@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
 
+    <!-- Custom font -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <!-- Google Icon Font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS -->
@@ -45,27 +47,10 @@
 </div>
 
 <ul class="sidenav" id="mobile-demo">
-    <li>
-        <div class="user-view">
-            <div class="background center">
-                <img src="/static/images/site_logo.png">
-            </div>
-            <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-            <a href="#name"><span class="white-text name">John Doe</span></a>
-            <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-        </div>
-    </li>
-    <li><a href="#"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#">Second Link</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
     <li><a class="waves-effect" href="{% url "hotel:signup" %}">Sign Up</a></li>
     <li><a class="waves-effect" href="{% url "login" %}">Login</a></li>
 </ul>
-<!-- Navbar End -->
+<!-- Nav bar End -->
 
 
 <!-- Content Start -->

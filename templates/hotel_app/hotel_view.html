@@ -45,39 +45,47 @@
                     <div id="book-now" class="modal">
                         <div class="modal-content">
                             <div class="search-box z-depth-0">
+                                <div class="center">Balance: 1000$</div>
+                                <br>
                                 <div class="row ">
-                                    <form class="col s12 m10 l12 push-s1 push-m2" method="get"
-                                          action="{% url "hotel:index" %}">
+                                    <form class="col s12 m10 l12 push-s1 push-m2" method="post" action="{% url "hotel:book" hotel_data.id %}">
+                                        {% csrf_token %}
                                         <div class="row">
+
                                             <div class="input-field col s10 m10 l4">
                                                 <i class="material-icons prefix">place</i>
-                                                <input placeholder="Place" type="text" name="place" class="validate"
-                                                       required>
+                                                <input placeholder="Hotel name" type="text" name="hotel_name" class="validate"
+                                                       value="{{ hotel_data.hotel_name }}" required>
                                             </div>
+
                                             <div class="input-field col s10 m5 l4">
                                                 <i class="material-icons prefix">date_range</i>
-                                                <input placeholder="Check in" type="text" name="check_in_date"
-                                                       class="datepicker">
+                                                <input placeholder="Check in" type="text" name="check_in_date" class="datepicker"
+                                                        {% if session.check_in_date %} value="{{ session.check_in_date }}" {% endif %} required>
                                             </div>
+
                                             <div class="input-field col s10 m5 l4">
                                                 <i class="material-icons prefix">date_range</i>
-                                                <input placeholder="Check out" type="text" name="check_out_date"
-                                                       class="datepicker">
+                                                <input placeholder="Check out" type="text" name="check_out_date" class="datepicker"
+                                                        {% if session.check_out_date %} value="{{ session.check_out_date }}" {% endif %} required>
                                             </div>
+
                                             <div class="input-field col s10 m10 l4">
                                                 <i class="material-icons prefix">airline_seat_individual_suite</i>
-                                                <input placeholder="Rooms" type="text" name="room" class="validate">
+                                                <input placeholder="Rooms" type="number" name="room" class="validate"
+                                                        {% if session.room %} value="{{ session.room }}" {% endif %} min="0" max="10" required>
                                             </div>
 
                                             <div class="input-field col s10 m5 l4">
                                                 <i class="material-icons prefix">people</i>
-                                                <input placeholder="Adults" type="text" name="adult" class="validate">
+                                                <input placeholder="Adults" type="number" name="adult" class="validate"
+                                                        {% if session.adult %} value="{{ session.adult }}" {% endif %} min="0" max="10" required>
                                             </div>
 
                                             <div class="input-field col s10 m5 l4">
                                                 <i class="material-icons prefix">child_care</i>
-                                                <input placeholder="Child's" type="text" name="children"
-                                                       class="validate">
+                                                <input placeholder="Child's" type="number" name="children" class="validate"
+                                                        {% if session.children %} value="{{ session.children }}" {% endif %} min="0" max="10" required>
                                             </div>
                                         </div>
                                         <div class="row center">
@@ -190,8 +198,6 @@
 
 
 {% block js %}
-    <script src="{% static "js/jquery-3.1.1.min.js" %}"></script>
-    <script src="{% static "js/materialize.min.js" %}"></script>
     <script>
         $(document).ready(function () {
             $("#s1").click(function () {
@@ -225,9 +231,6 @@
             $('html, body').animate({
                 scrollTop: $(goto).offset().top
             }, 800);
-        });
-        $(document).ready(function () {
-            $('.datepicker').datepicker();
         });
 
         $(document).ready(function () {

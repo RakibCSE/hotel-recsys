@@ -2,10 +2,9 @@ import json
 import os
 
 import django_heroku
+import dj_database_url
 
-from celery.schedules import crontab
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 try:
@@ -15,16 +14,12 @@ except FileNotFoundError:
     with open(BASE_DIR + "/" + "config.json", "r") as file:
         JSON_DATA = json.load(file)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = (os.environ.get("DEBUG") == "True")
 
-ALLOWED_HOSTS = ['127.0.0.1', 'hotel-recsys.herokuapp.com']
+ALLOWED_HOSTS = ['hotel-recsys.herokuapp.com', 'www.recsys.xyz',
+                 'recsys.xyz', '.recsys.xyz', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -39,10 +34,7 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'hotel',
-    'ml_engine',
 ]
-
-AUTH_USER_MODEL = "hotel.CustomUser"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,38 +67,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'proj.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'NAME': JSON_DATA['db_name'],
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'USER': JSON_DATA['db_user'],
+            'PASSWORD': JSON_DATA['db_password'],
+            'ATOMIC_REQUESTS': True,
+            'HOST': 'localhost',
+            'PORT': '',
+            'CONN_MAX_AGE': 600,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600)
+    }
 
 # Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
+AUTH_USER_MODEL = "hotel.CustomUser"
 LOGIN_REDIRECT_URL = "hotel:index"
 LOGOUT_REDIRECT_URL = "hotel:index"
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -119,8 +114,6 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
@@ -141,19 +134,5 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 INTERNAL_IPS = JSON_DATA["internal_ip"]
 
-# Celery application definitions
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Dhaka'
-CELERY_IMPORTS = ('ml_engine.tasks',)
-CELERY_BEAT_SCHEDULE = {
-    'main': {
-        'task': 'ml_engine.tasks.main',
-        'schedule': crontab(minute='50')
-    },
-}
-
-django_heroku.settings(locals())
+if not DEBUG:
+    django_heroku.settings(locals())

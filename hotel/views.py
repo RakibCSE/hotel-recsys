@@ -1,5 +1,12 @@
+import json
+import pandas as pd
+import logging
+
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
@@ -7,9 +14,10 @@ from django.views.generic.edit import CreateView
 
 from .forms import CustomUserCreationForm
 from .models import HotelDetail, UserInteraction
-from .utils import *
+from . import utils
 
-from geoip2 import webservice
+
+logger = logging.getLogger("views")
 
 
 class SignUpView(CreateView):
@@ -21,68 +29,7 @@ class SignUpView(CreateView):
     template_name = "accounts/signup.html"
 
 
-def save_search_data(request, query_data, booking=0):
-    """
-    Save user interaction data.
-    Args:
-        request:
-        query_data: Queryset data
-        booking: Hotel is booked or not
-    """
-    account_id = 141975
-    license_key = "Uf4x3NwFVldx"
-
-    client = webservice.Client(account_id, license_key)
-    user_ip = get_user_ip()
-    response = client.insights(ip_address=user_ip)
-
-    session_data = request.session
-    checkin_date = session_data['check_in_date']
-    checkout_date = session_data['check_out_date']
-    if session_data['room']:
-        room = int(session_data['room'])
-    if session_data['adult']:
-        adult = int(session_data['adult'])
-    if session_data['children']:
-        children = int(session_data['children'])
-
-    date_today = datetime.today().strftime("%d-%m-%Y")
-
-    hotel_latitude = query_data.hotel_latitude
-    hotel_longitude = query_data.hotel_longitude
-    user_latitude = response.location.latitude
-    user_longitude = response.location.longitude
-    orig_distance = calculate_distance(user_latitude, user_longitude,
-                                       hotel_latitude, hotel_longitude)
-
-    user_interaction_obj = UserInteraction()
-
-    if request.user.id:
-        user_interaction_obj.user_id = request.user.id
-    else:
-        user_interaction_obj.user_id = 0
-
-    user_interaction_obj.hotel_id = query_data.hotel_id
-    user_interaction_obj.year = get_year(date_today)
-    user_interaction_obj.month = get_month(date_today)
-    user_interaction_obj.srch_ci_year = get_year(checkin_date)
-    user_interaction_obj.srch_ci_month = get_month(checkin_date)
-    user_interaction_obj.srch_co_year = get_year(checkout_date)
-    user_interaction_obj.srch_co_month = get_month(checkout_date)
-    user_interaction_obj.hotel_country = query_data.country_id
-    user_interaction_obj.user_location_country = response.country.geoname_id
-    user_interaction_obj.user_location_city = response.city.geoname_id
-    user_interaction_obj.user_location_region = response.subdivisions.most_specific.geoname_id
-    user_interaction_obj.is_booking = booking
-    user_interaction_obj.orig_destination_distance = orig_distance
-    user_interaction_obj.srch_destination_id = query_data.district_id
-    user_interaction_obj.srch_rm_cnt = room
-    user_interaction_obj.srch_adults_cnt = adult
-    user_interaction_obj.srch_children_cnt = children
-    user_interaction_obj.save()
-
-
-@ csrf_exempt
+@csrf_exempt
 def index(request):
     """
     Returns search results view or return to homepage
@@ -90,8 +37,102 @@ def index(request):
         request:
 
     Returns:
+        response:
+    """
+
+    utils.train_algorithm()
+
+    response = render(request, "hotel_app/index.html", {
+        'session': request.session
+    })
+    return response
+
+
+def hotel_view(request, hotel_id):
+    """
+    Returns hotel view page
+    Args:
         request:
-        hotel_data: List of queryset.
+        hotel_id: Hotel ID
+
+    Returns:
+        response: Response with hotel data
+    """
+
+    hotel_data = HotelDetail.objects.get(id=int(hotel_id))
+
+    utils.save_search_data(request, hotel_data, booking=0)
+
+    response = render(request, "hotel_app/hotel_view.html", {
+        'hotel_data': hotel_data,
+        'session': request.session
+    })
+    return response
+
+
+@login_required
+def book(request, hotel_id):
+    """
+    Book hotel
+    Args:
+        request:
+        hotel_id:
+
+    Returns:
+        response:
+    """
+    if request.POST:
+        post_data = request.POST
+
+        request.session['hotel_name'] = post_data['hotel_name']
+        request.session['check_in_date'] = post_data['check_in_date']
+        request.session['check_out_date'] = post_data['check_out_date']
+        request.session['room'] = post_data['room']
+        request.session['room'] = post_data['room']
+        request.session['adult'] = post_data['adult']
+        request.session['children'] = post_data['children']
+
+        hotel_data = HotelDetail.objects.get(id=int(hotel_id))
+        utils.save_search_data(request, hotel_data, booking=1)
+
+        response = render(request, "hotel_app/index.html", {
+            'message': "Hotel booked successfully."
+        })
+
+        return response
+
+    response = render(request, "hotel_app/index.html", {
+        'message': "Something wrong. Try again."
+    })
+    return response
+
+
+def search_by_query(query_text):
+    """
+    Returns query results as a queryset.
+
+    Args:
+        query_text (str): Search query text
+
+    Returns:
+        query_result: Query result
+    """
+    vector = SearchVector('accommodation_type', 'hotel_name',
+                          'district', 'country', 'address', 'region', 'review_badge',)
+    query = SearchQuery(query_text)
+    query_result = HotelDetail.objects.annotate(
+        search=vector).filter(search=query)
+    return query_result
+
+
+def search(request):
+    """
+    Returns the search results
+    Args:
+        request: GET request with search parameters
+
+    Returns:
+        response:
     """
     if request.GET:
         get_data = request.GET
@@ -106,12 +147,20 @@ def index(request):
         place = get_data['place']
         page = int(request.GET.get("page", 1))
 
-        hotels_data_list = HotelDetail.objects.annotate(
-            search=SearchVector('hotel_name', 'district', 'country', 'address', 'region'),
-        ).filter(search=place)
+        hotels_data_list = search_by_query(place)
 
         paginator = Paginator(list(hotels_data_list), 10)
-        # total_pages = paginator.num_pages
+
+        # Recommendation section
+        recommended_hotels = []
+        hotel_clusters = utils.get_recommendations(request, hotels_data_list)
+
+        districts = list(set([data["district_id"]
+                              for data in list(hotels_data_list.values())]))
+
+        if hotel_clusters and districts:
+            recommended_hotels = HotelDetail.objects.filter(
+                cluster__in=hotel_clusters, district_id__in=districts)
 
         try:
             hotels_data = paginator.page(page)
@@ -120,29 +169,59 @@ def index(request):
         except EmptyPage:
             hotels_data = paginator.page(paginator.num_pages)
 
-        return render(request, "hotel_app/search_result.html", {
+        response = render(request, "hotel_app/search_result.html", {
             'hotels_data': hotels_data,
+            'recommended_hotels': recommended_hotels[:5],
+            'session': request.session
         })
+        return response
 
-    return render(request, "hotel_app/index.html")
+    response = render(request, "hotel_app/search_result.html", {
+        'session': request.session
+    })
+    return response
 
 
-def hotel_view(request, hotel_id):
+def search_ajax(request):
     """
-    Returns hotel view page
+    Returns AJAX Search results
     Args:
         request:
-        hotel_id: Hotel ID
 
     Returns:
-        request:
-        hotel_data: Specific hotel queryset data.
+        JsonResponse: Return search data into JSON
     """
+    search_data = {}
+    if request.is_ajax:
+        place_text = request.GET['place_text']
 
-    hotel_data = HotelDetail.objects.get(id=hotel_id)
+        hotels_data_list = search_by_query(place_text)
 
-    # save_search_data(request, hotel_data)
+        hotel_data_df = pd.DataFrame(list(hotels_data_list.values())).dropna()
 
-    return render(request, "hotel_app/hotel_view.html", {
-        'hotel_data': hotel_data,
-    })
+        if not hotel_data_df.empty:
+
+            country_list = hotel_data_df.country.unique().tolist()
+            location_list = hotel_data_df.region.unique().tolist() + hotel_data_df.district.unique().tolist()
+            hotel_list = hotel_data_df.hotel_name.unique().tolist()
+
+            search_data_json = json.dumps({
+                "country_result": {
+                    "heading": "Country",
+                    "result": country_list
+                },
+                "location_result": {
+                    "heading": "Places",
+                    "result": location_list
+                },
+                "hotel_result": {
+                    "heading": "Hotels",
+                    "result": hotel_list
+                }
+            })
+
+            return JsonResponse(search_data_json, safe=False)
+        else:
+            return JsonResponse(json.dumps({
+                "status": "No data found",
+            }), safe=False)

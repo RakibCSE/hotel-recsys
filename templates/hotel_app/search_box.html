@@ -1,0 +1,78 @@
+{% load staticfiles %}
+
+{% block css %}
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static "css/search_box_style.css" %}">
+{% endblock %}
+
+{% block content %}
+<div class="card-panel z-depth-3">
+    <div class="row">
+        <div class="col l12 m12 s12 push-s1 push-m1">
+            <h4 class="search-here left">Find your perfect hotel here</h4>
+        </div>
+        <form class="col l12 m12 s12" method="get" action="{% url "hotel:search" %}">
+            <div class="row">
+                <div class="input-field col s10 m10 l6">
+                    <i class="material-icons prefix">place</i>
+
+                    <input placeholder="Place" id="place" type="text" name="place" class="autocomplete"
+                        {% if session.place %} value="{{ session.place }}" {% endif %} required>
+                </div>
+
+                <div class="input-field col s10 m10 l3">
+                    <i class="material-icons prefix">date_range</i>
+
+                    <input placeholder="Check in" type="text" name="check_in_date" class="datepicker datepicker-start"
+                        {% if session.check_in_date %} value="{{ session.check_in_date }}" {% endif %} required>
+                </div>
+
+                <div class="input-field col s10 m10 l3">
+                    <i class="material-icons prefix">date_range</i>
+
+                    <input placeholder="Check out" type="text" name="check_out_date" class="datepicker datepicker-end"
+                        {% if session.check_out_date %} value="{{ session.check_out_date }}" {% endif %} required>
+                </div>
+
+                <div class="input-field col s10 m10 l4">
+                    <i class="material-icons prefix">airline_seat_individual_suite</i>
+
+                    <input placeholder="Rooms" type="number" name="room" class="validate" min="1" max="10"
+                        {% if session.room %} value="{{ session.room }}" {% endif %} required>
+                </div>
+
+                <div class="input-field col s10 m5 l4">
+                    <i class="material-icons prefix">people</i>
+
+                    <input placeholder="Adults" type="number" name="adult" class="validate" min="1" max="10"
+                        {% if session.adult %} value="{{ session.adult }}" {% endif %} required>
+                </div>
+
+                <div class="input-field col s10 m5 l4">
+                    <i class="material-icons prefix">child_care</i>
+
+                    <input placeholder="Child's" type="number" name="children" class="validate" min="0" max="10"
+                        {% if session.children %} value="{{ session.children }}" {% endif %} required>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="col s10 m5 l12 push-m3 search-button">
+                    <button class="btn btn-large waves-effect red darken-3 z-depth-2" type="submit">
+                        Check Now <i class="material-icons right">send</i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Ajax result here -->
+<div class="row">
+    <ul class="collapsible popout" id="result"></ul>
+</div>
+{% endblock %}
+
+<script>
+    $(document).ready(function () {
+        $('.collapsible').collapsible();
+    });
+</script>

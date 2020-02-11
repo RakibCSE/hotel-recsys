@@ -1,89 +1,33 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 
-{% block css %}
-    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static "css/search_box_style.css" %}">
-{% endblock %}
 
 {% block content %}
     <div class="container section">
-        <div class="card-panel z-depth-3">
-            <div class="row">
-                <div class="col l12 m12 s12 push-s1 push-m1">
-                    <h4 class="search-here left">Find your perfect hotel here</h4>
+
+        {% if message %}
+            <div class="row" id="alert_box">
+                <div class="col s12 m12">
+                    <div class="card red darken-1">
+                        <div class="row">
+                            <div class="col s12 m10">
+                                <div class="card-content white-text">
+                                    <p>{{ message }}</p>
+                                </div>
+                            </div>
+                            <div class="col s12 m2">
+                                <i class="fa fa-times icon_style" id="alert_close" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form class="col s12 m12 l12 push-s1 push-m1" method="get" action="{% url "hotel:index" %}">
-                    <div class="row">
-                        <div class="input-field col s10 m10 l3">
-                            <i class="material-icons prefix">place</i>
-                            <input placeholder="Place" type="text" name="place" class="validate" required>
-                        </div>
-                        <div class="input-field col s10 m10 l3">
-                            <i class="material-icons prefix">date_range</i>
-                            <input placeholder="Check in" type="text" name="check_in_date" class="datepicker">
-                        </div>
-                        <div class="input-field col s10 m10 l3">
-                            <i class="material-icons prefix">date_range</i>
-                            <input placeholder="Check out" type="text" name="check_out_date" class="datepicker">
-                        </div>
-                        <div class="input-field col s10 m10 l1">
-                            <i class="material-icons prefix">airline_seat_individual_suite</i>
-                            <input placeholder="Rooms" type="text" name="room" class="validate">
-                        </div>
-
-                        <div class="input-field col s10 m5 l1">
-                            <i class="material-icons prefix">people</i>
-                            <input placeholder="Adults" type="text" name="adult" class="validate">
-                        </div>
-
-                        <div class="input-field col s10 m5 l1">
-                            <i class="material-icons prefix">child_care</i>
-                            <input placeholder="Child's" type="text" name="children" class="validate">
-                        </div>
-                    </div>
-                    <div class="row center">
-                        <div class="col s10 m5 l12 push-m3 search-button">
-                            <button class="btn btn-large waves-effect red darken-3 z-depth-2" type="submit">
-                                Check Now <i class="material-icons right">send</i></button>
-                        </div>
-                    </div>
-                </form>
             </div>
-        </div>
-    </div>
+        {% endif %}
 
-    <div class="slider">
-        <ul class="slides">
-            <li>
-                <img src="{% static "images/slider_1.jpg" %}" alt="hotel image">
-                <div class="caption center-align">
-                    <h3>Live The Wonderful Life!</h3>
-                    <h5 class="light grey-text text-lighten-3">Choose The Best One.</h5>
-                </div>
-            </li>
-            <li>
-                <img src="{% static "images/slider_2.jpg" %}"> <!-- random image -->
-                <div class="caption left-align">
-                    <h3>DREAMS COME TRUE!</h3>
-                    <h5 class="light grey-text text-lighten-3">We are Here to Help You Enjoy Your Stay.</h5>
-                </div>
-            </li>
-            <li>
-                <img src="{% static "images/slider_3.jpg" %}"> <!-- random image -->
-                <div class="caption right-align">
-                    <h3>Modern & Spacious Rooms!</h3>
-                    <h5 class="light grey-text text-lighten-3">Enjoy Your Holidays.</h5>
-                </div>
-            </li>
-            <li>
-                <img src="{% static "images/slider_4.jpg" %}"> <!-- random image -->
-                <div class="caption center-align">
-                    <h3>Providing Comfortable Luxury Residence!</h3>
-                    <h5 class="light grey-text text-lighten-3">A Moment Of Pure Prestige.</h5>
-                </div>
-            </li>
-        </ul>
+        {% include "hotel_app/search_box.html" %}
     </div>
+{% endblock %}
 
+{% block js %}
+    <script src="{% static "js/search_ajax.js" %}"></script>
 {% endblock %}
