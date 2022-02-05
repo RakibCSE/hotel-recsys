@@ -1,25 +1,22 @@
-import json
 import os
-
-import django_heroku
-import dj_database_url
-
-
+from decouple import config
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-try:
-    with open(BASE_DIR + "/" + "config.local.json", "r") as file:
-        JSON_DATA = json.load(file)
-except FileNotFoundError:
-    with open(BASE_DIR + "/" + "config.json", "r") as file:
-        JSON_DATA = json.load(file)
+# try:
+#     with open(BASE_DIR + "/" + "config.local.json", "r") as file:
+#         JSON_DATA = json.load(file)
+# except FileNotFoundError:
+#     with open(BASE_DIR + "/" + "config.json", "r") as file:
+#         JSON_DATA = json.load(file)
 
-SECRET_KEY = os.environ.get("SECRET_KEY", JSON_DATA['secret_key'])
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = (os.environ.get("DEBUG") == "True")
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['hotel-recsys.herokuapp.com', 'www.recsys.xyz',
-                 'recsys.xyz', '.recsys.xyz', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['3.227.122.17']
+
+if DEBUG:
+    ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -68,23 +65,35 @@ WSGI_APPLICATION = 'proj.wsgi.application'
 
 # Database
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'NAME': JSON_DATA['db_name'],
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'USER': JSON_DATA['db_user'],
-            'PASSWORD': JSON_DATA['db_password'],
-            'ATOMIC_REQUESTS': True,
-            'HOST': 'localhost',
-            'PORT': '',
-            'CONN_MAX_AGE': 600,
-        }
+# DATABASES = {
+#     'default':
+#         {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         } if DEBUG else {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': config('DBNAME'),
+#             'USER': config('DBUSER'),
+#             'PASSWORD': config('DBPASSWORD'),
+#             'ATOMIC_REQUESTS': True,
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#             'CONN_MAX_AGE': 600,
+#         }
+# }
+
+DATABASES = {
+    'default': {
+        'NAME': config('DB_NAME'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'ATOMIC_REQUESTS': True,
+        'HOST': 'localhost',
+        'PORT': 5432,
+        'CONN_MAX_AGE': 600,
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600)
-    }
+}
 
 # Password validation
 
@@ -105,7 +114,8 @@ LOGOUT_REDIRECT_URL = "hotel:index"
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Dhaka'
+# TIME_ZONE = 'Asia/Dhaka'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -117,10 +127,10 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-STATICFILES_FINDERS = {
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
-}
+# STATICFILES_FINDERS = {
+#     "django.contrib.staticfiles.finders.FileSystemFinder",
+#     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+# }
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -132,7 +142,7 @@ MEDIA_URL = '/media/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-INTERNAL_IPS = JSON_DATA["internal_ip"]
-
-if not DEBUG:
-    django_heroku.settings(locals())
+# INTERNAL_IPS = JSON_DATA["internal_ip"]
+#
+# if not DEBUG:
+#     django_heroku.settings(locals())

@@ -99,3 +99,6 @@ class UserSearch(models.Model):
     hotel_id = models.BigIntegerField()
     hotel_cluster = models.IntegerField(default=0)
     counter = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return str(f'{self.keyword}|{self.counter}')
