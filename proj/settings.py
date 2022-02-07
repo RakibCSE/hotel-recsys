@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['3.227.122.17']
+ALLOWED_HOSTS = ['3.227.35.153']
 
 if DEBUG:
     ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
